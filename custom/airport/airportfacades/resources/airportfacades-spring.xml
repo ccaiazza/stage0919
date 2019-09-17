@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2018 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<alias alias="airportFacade" name="defaultAirportFacade" />
+	<bean id="defaultAirportFacade"
+		class="it.uiip.airport.facades.impl.DefaultAirportFacade">
+		<property name="airportService" ref="airportService" />
+		<property name="airportConverter" ref="airportConverter" />
+	</bean>
+
+
+	<alias alias="airportConverter" name="defaultAirportConverter" />
+	<bean id="defaultAirportConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.AirportData" />
+		<property name="populators">
+			<list>
+				<ref bean="airportPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAirportPopulator" alias="airportPopulator" />
+	<bean id="defaultAirportPopulator"
+		class="it.uiip.airport.facades.populators.AirportPopulator">
+	</bean>
+
+
+
+	<alias alias="planeFacade" name="defaultPlaneFacade" />
+	<bean id="defaultPlaneFacade"
+		class="it.uiip.airport.facades.impl.DefaultPlaneFacade">
+		<property name="planeService" ref="planeService" />
+		<property name="planeConverter" ref="planeConverter" />
+	</bean>
+
+	<alias alias="planeConverter" name="defaultPlaneConverter" />
+	<bean id="defaultPlaneConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.PlaneData" />
+		<property name="populators">
+			<list>
+				<ref bean="planePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPlanePopulator" alias="planePopulator" />
+	<bean id="defaultPlanePopulator"
+		class="it.uiip.airport.facades.populators.PlanePopulator">
+	</bean>
+
+	<alias name="defaultPlaneReverseConverter"
+		alias="planeReverseConverter" />
+	<bean id="defaultPlaneReverseConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.core.model.PlaneModel" />
+		<property name="populators">
+			<list>
+				<ref bean="planeReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPlaneReversePopulator"
+		alias="planeReversePopulator" />
+	<bean id="defaultPlaneReversePopulator"
+		class="it.uiip.airport.facades.populators.PlaneReversePopulator">
+	</bean>
+
+
+
+	<alias alias="flightFacade" name="defaultFlightFacade" />
+	<bean id="defaultFlightFacade"
+		class="it.uiip.airport.facades.impl.DefaultFlightFacade">
+		<property name="flightService" ref="flightService" />
+		<property name="flightConverter" ref="flightConverter" />
+	</bean>
+
+	<alias alias="flightConverter" name="defaultFlightConverter" />
+	<bean id="defaultFlightConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.FlightData" />
+		<property name="populators">
+			<list>
+				<ref bean="flightPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultFlightPopulator" alias="flightPopulator" />
+	<bean id="defaultFlightPopulator"
+		class="it.uiip.airport.facades.populators.FlightPopulator">
+		<property name="airportConverter" ref="airportConverter" />
+		<property name="planeConverter" ref="planeConverter" />
+	</bean>
+
+	<alias alias="passengerFacade" name="defaultPassengerFacade" />
+	<bean id="defaultPassengerFacade"
+		class="it.uiip.airport.facades.impl.DefaultPassengerFacade">
+		<property name="passengerService" ref="passengerService" />
+		<property name="passengerConverter" ref="passengerConverter" />
+	</bean>
+
+	<alias name="defaultPassengerConverter"
+		alias="passengerConverter" />
+	<bean id="defaultPassengerConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.PassengerData" />
+		<property name="populators">
+			<list>
+				<ref bean="passengerPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPassengerPopulator"
+		alias="passengerPopulator" />
+	<bean id="defaultPassengerPopulator"
+		class="it.uiip.airport.facades.populators.PassengerPopulator"></bean>
+
+
+	<alias alias="simpleSuggestionFacade"
+		name="defaultSimpleSuggestionFacade" />
+	<bean id="defaultSimpleSuggestionFacade"
+		class="it.uiip.airport.facades.suggestion.impl.DefaultSimpleSuggestionFacade">
+		<property name="simpleSuggestionService"
+			ref="simpleSuggestionService" />
+		<property name="userService" ref="userService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="productService" ref="productService" />
+		<property name="productConverter"
+			ref="carouselProductConverter" />
+		<property name="cartService" ref="cartService" />
+	</bean>
+
+	<bean id="carouselProductConverter"
+		parent="defaultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productPricePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorVariantOptionDataConverter"
+		alias="variantOptionDataConverter" />
+	<bean id="acceleratorVariantOptionDataConverter"
+		parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget"
+			bean="variantOptionData" />
+		<property name="populators">
+			<list>
+				<ref bean="acceleratorVariantOptionDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAcceleratorVariantOptionDataPopulator"
+		alias="acceleratorVariantOptionDataPopulator" />
+	<bean id="defaultAcceleratorVariantOptionDataPopulator"
+		class="it.uiip.airport.facades.populators.AcceleratorVariantOptionDataPopulator"
+		parent="variantOptionDataPopulator">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService"
+			ref="mediaContainerService" />
+		<property name="typeService" ref="typeService" />
+		<property name="imageFormatMapping" ref="imageFormatMapping" />
+		<property name="variantAttributeMapping">
+			<map>
+				<entry key="ApparelStyleVariantProduct.style"
+					value="styleSwatch" />
+			</map>
+		</property>
+	</bean>
+
+
+	<alias name="acceleratorGenderConverter" alias="genderConverter" />
+	<bean id="acceleratorGenderConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.product.data.GenderData" />
+		<property name="populators">
+			<list>
+				<ref bean="genderDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultGenderDataPopulator"
+		alias="genderDataPopulator" />
+	<bean id="defaultGenderDataPopulator"
+		class="it.uiip.airport.facades.populators.GenderDataPopulator">
+		<property name="typeService" ref="typeService" />
+	</bean>
+
+	<bean id="apparelProductPopulator"
+		class="it.uiip.airport.facades.populators.ApparelProductPopulator">
+		<property name="genderConverter" ref="genderConverter" />
+	</bean>
+
+	<!-- Add the apparelProductPopulator to the productConverter -->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="apparelProductPopulator" />
+	</bean>
+
+	<!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping"
+		alias="imageFormatMapping" />
+	<bean id="acceleratorImageFormatMapping"
+		parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="superZoom" value="1200Wx1200H" />
+				<entry key="zoom" value="515Wx515H" />
+				<entry key="store" value="365Wx246H" />
+				<entry key="product" value="300Wx300H" />
+				<entry key="thumbnail" value="96Wx96H" />
+				<entry key="cartIcon" value="65Wx65H" />
+				<entry key="styleSwatch" value="30Wx30H" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator"
+		alias="productPrimaryImagePopulator" />
+	<bean id="acceleratorProductPrimaryImagePopulator"
+		parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator"
+		alias="productGalleryImagesPopulator" />
+	<bean id="acceleratorProductGalleryImagesPopulator"
+		parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>superZoom</value>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerEmailContext"
+		class="it.uiip.airport.facades.process.email.context.CustomerEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
+	</bean>
+
+	<bean id="forgottenPasswordEmailContext"
+		class="it.uiip.airport.facades.process.email.context.ForgottenPasswordEmailContext"
+		parent="customerEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
+	</bean>
+
+	<bean id="orderNotificationEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+
+	<bean id="quoteNotificationEmailContext"
+		class="it.uiip.airport.facades.process.email.context.QuoteNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="quoteService" ref="quoteService" />
+		<property name="quoteConverter" ref="quoteConverter" />
+	</bean>
+
+	<bean id="deliverySentEmailContext"
+		class="it.uiip.airport.facades.process.email.context.DeliverySentEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter"
+			ref="consignmentConverter" />
+	</bean>
+
+	<bean id="readyForPickupEmailContext"
+		class="it.uiip.airport.facades.process.email.context.ReadyForPickupEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter"
+			ref="consignmentConverter" />
+	</bean>
+
+	<bean id="orderCancelledEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderCancelledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+
+	<bean id="orderRefundEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderRefundEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext"
+		class="it.uiip.airport.facades.process.email.context.ConsignmentCollectionReminderEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter"
+			ref="consignmentConverter" />
+		<property name="formatFactory" ref="formatFactory" />
+		<property
+			name="customerServiceUncollectedConsignmentStrategy"
+			ref="customerServiceUncollectedConsignmentStrategy" />
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+
+	<bean id="orderPartiallyModifiedEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderPartiallyModifiedEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+		<property name="orderEntryConverter"
+			ref="orderEntryConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderPartiallyCanceledEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext"
+		class="it.uiip.airport.facades.process.email.context.OrderPartiallyRefundedEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext"
+		class="it.uiip.airport.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter"
+			ref="consignmentConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<alias
+		name="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		class="it.uiip.airport.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+		<property name="pointOfServiceDistanceConverter"
+			ref="pointOfServiceDistanceConverter" />
+	</bean>
+
+	<bean id="genderData"
+		class="it.uiip.airport.facades.product.data.GenderData"
+		scope="prototype" />
+</beans>
