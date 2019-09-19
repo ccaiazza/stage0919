@@ -31,44 +31,42 @@
 			<value code="YELLOW" />
 		</enumtype>
 
-		<enumtype generate="true" code="daysEnum" autocreate="true"
+		<enumtype generate="true" code="statePlaneEnum" autocreate="true"
 			dynamic="true">
-			<value code="lunedi" />
-			<value code="martedi" />
-			<value code="mercoledi" />
-			<value code="giovedi" />
-			<value code="venerdi" />
-			<value code="sabato" />
-			<value code="domenica" />
+			<value code="assigned" />
+			<value code="maintenance" />
+			<value code="available" />
 		</enumtype>
 	</enumtypes>
 	
+	<!-- *******************************RELATIONS************************************ -->
+	
 	<relations>
-		<relation localized="false" code="PassengerRouteRelation" autocreate="true" generate="true">
-		<deployment table="Pass2Rout" typecode="21099"/>
-			<sourceElement qualifier="passenger" type="Passenger" cardinality="many" 
-							collectiontype="set">
-			<modifiers read="true" write="true" search="true" optional="true"/>		
-			</sourceElement>
-			<targetElement qualifier="route" type="Route" 
-						   cardinality="many" collectiontype="set">
-			<modifiers read="true" write="true" search="true" optional="true"/>	
-			</targetElement>
-		</relation>
+	 <relation code="AirLineToPlanes" generate="true" localized="false" autocreate="true">
+            <sourceElement qualifier="airline" type="Airline" cardinality="one" >
+                <modifiers read="true" write="true" search="true" optional="false"/>
+            </sourceElement>
+            <targetElement qualifier="plane" type="Plane" cardinality="many" collectiontype="list">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+	
 	</relations>
+	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
 
 		<itemtype code="Airport" generate="true" autocreate="true">
-			<deployment table="airport" typecode="21345" />
+			<deployment table="airport" typecode="20101" />
 			<attributes>
-				<attribute qualifier="codeAirport" type="java.lang.String">
+				<attribute qualifier="codeIATA" type="java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="name" type="java.lang.String">
 					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="city" type="localized:java.lang.String">
 					<persistence type="property"></persistence>
@@ -84,21 +82,50 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+		
+		<itemtype code="AirLine" generate="true" autocreate="true">
+			<deployment table="airline" typecode="20102" />
+			<attributes>
+				<attribute qualifier="codeAirLine" type="java.lang.String">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+			</attributes>
+		</itemtype>
 
 		<itemtype code="Plane" generate="true" autocreate="true">
-			<deployment table="plane" typecode="21346" />
+			<deployment table="plane" typecode="20105" />
 			<attributes>
 				<attribute qualifier="codePlane" type="java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false"/>
 				</attribute>
-				<attribute qualifier="typePlane" type="java.lang.String">
+				<attribute qualifier="typePlane" type="TypePlane">
 					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
+					<modifiers optional="false"/>
 				</attribute>
-				<attribute qualifier="numOfSits" type="java.lang.Integer">
+				<attribute qualifier="statePlane" type="statePlaneEnum">
 					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
+					<modifiers optional="false"/>
+				</attribute>
+				
+			</attributes>
+		</itemtype>
+
+		<itemtype code="TypePlane" generate="true" autocreate="true">
+			<deployment table="typeplane" typecode="20106" />
+			<attributes>
+				<attribute qualifier="model" type="java.lang.String">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="numMaxSits" type="java.lang.Integer">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="goods" type="java.lang.Integer">
 					<description>quantity of goods</description>
@@ -107,17 +134,13 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-
-		<itemtype code="Flight" generate="true" autocreate="true">
-			<deployment table="flight" typecode="21347" />
+		
+		<itemtype code="Route" generate="true" autocreate="true">
+			<deployment table="route" typecode="20103" />
 			<attributes>
-				<attribute qualifier="codeFlight" type="java.lang.String">
-					<persistence type="property"></persistence>
-					<modifiers optional="false"/>
-				</attribute>
-				<attribute qualifier="weekDay" type="daysEnum">
-					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
+				<attribute qualifier="codeRoute" type="java.lang.String">
+						<persistence type="property"></persistence>
+						<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="airportDep" type="Airport">
 					<persistence type="property"></persistence>
@@ -127,61 +150,14 @@
 					<persistence type="property"></persistence>
 					<modifiers optional="true"/>
 				</attribute>
-				<attribute qualifier="plane" type="Plane">
-					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
-				</attribute>
-				<attribute qualifier="timeDep" type="java.lang.Integer">
-					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
-				</attribute>
-				<attribute qualifier="timeArr" type="java.lang.Integer">
-					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
-				</attribute>
-			</attributes>
-		</itemtype>
-		
-		<itemtype code="Route" generate="true" autocreate="true">
-			<deployment table="route" typecode="21348" />
-			<attributes>
-				<attribute qualifier="codeRoute" type="java.lang.String">
+				<attribute qualifier="routeTime" type="java.util.Integer">
 						<persistence type="property"></persistence>
 						<modifiers optional="false"/>
 				</attribute>
-				<attribute qualifier="flight" type="Flight">
-						<persistence type="property"></persistence>
-						<modifiers optional="true"/>
-				</attribute>
-				<attribute qualifier="dateRouteDep" type="java.util.Date">
-						<persistence type="property"></persistence>
-						<modifiers optional="true"/>
-				</attribute>
-				<attribute qualifier="dateRouteArr" type="java.util.Date">
-						<persistence type="property"></persistence>
-						<modifiers optional="true"/>
-				</attribute>
 			</attributes>
 		</itemtype>
 		
 		
-		<itemtype code="Passenger" extends="User" generate="true" autocreate="true">
-			<deployment table="passenger" typecode="23000" />
-			<attributes>
-				<attribute qualifier="codeFiscal" type="java.lang.String">
-					<persistence type="property"></persistence>
-					<modifiers optional="false"/>
-				</attribute>
-				<attribute qualifier="birthday" type="java.util.Date">
-					<persistence type="property"></persistence>
-					<modifiers optional="true"/>
-				</attribute>
-				<attribute qualifier="age" type="java.lang.Integer">
-					<persistence type="dynamic" attributeHandler="agePassengerHandler"></persistence>
-					<modifiers write="false"/>
-				</attribute>
-			</attributes>
-		</itemtype>
 
 		<!-- TypeGroups are for structure of this file only -->
 
