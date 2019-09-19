@@ -133,7 +133,7 @@
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>
-				<attribute qualifier="country" type="java.lang.Integer">
+				<attribute qualifier="runways" type="java.lang.Integer">
 					<persistence type="property"></persistence>
 					<modifiers optional="true" />
 				</attribute>
@@ -266,7 +266,7 @@
 					<persistence type="property"></persistence>
 					<modifiers optional="true" />
 				</attribute>
-				<attribute qualifier="routeTime" type="java.util.Integer">
+				<attribute qualifier="routeTime" type="java.lang.Integer">
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>

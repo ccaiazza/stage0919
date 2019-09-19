@@ -35,12 +35,6 @@
 	
 	
 	
-	<alias name="defaultAirportDao" alias="airportDao"/>
-	<bean id="defaultAirportDao" class="it.uiip.airport.core.dao.impl.DefaultAirportDao">
-		<constructor-arg value="#{T(it.uiip.airport.core.model.AirportModel)._TYPECODE}"/>
-	</bean>
-
-	
 
 
 
