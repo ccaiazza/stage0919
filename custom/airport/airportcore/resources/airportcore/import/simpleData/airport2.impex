@@ -1,0 +1,153 @@
+INSERT_UPDATE Airport; codeIATA[unique=true]; name; city[lang=en]; city[lang=it]; country[lang=en]; country[lang=it]; runways
+;GOA;	Cristoforo Colombo;		Genoa;		Genoa;		Italy;		Italia;6
+;GRJ;	George;				George;		George;		South Africa;	Sud Africa;8
+;GOI;	Dabolim;			Goa;		Goa;		India;		India;5
+;GDX;	Magadan;			Magadan;	Magadan;	Russia;		Russia;7
+;FLR;	Firenze;			Florence;	Firenze;	Italy;		Italia;8
+;FCO;	Leonardo Da Vinci/Fiumicino;	Rome;		Roma;		Italy;		Italia;5
+;FBU;	Fornebu Logan;			Oslo;		Oslo;		Norway;		Norvegia;12
+;CDG;	Charles De Gaulle;		Paris;		Parigi;		France;		Francia;7
+;BVB;	Boa Vista;			Roraima;	Roraima;	Brazil;		Brasile;12
+
+INSERT_UPDATE TypePlane; model[unique=true];numMaxSits;goods
+;Boeing 737;		400;	150
+;Airbus A320;		560;	200
+;MD-80/90-200;		600;	150
+;MD-95-200;			900;	400
+;Boeing 717-8;		700;	200
+;Airbus A3-400;		624;	140
+;Boeing 777X;		520;	110
+
+INSERT_UPDATE Plane; codePlane[unique=true];typePlane(model);statePlane(code);airline(codeAirLine)
+;P001;	Boeing 737;		assigned;	AZ
+;P002;	Airbus A320;	assigned;	AZ
+;P003;	MD-80/90-200;	assigned;	FR
+;P004;	MD-95-200;		assigned;	FR
+;P005;	Boeing 717-8;	assigned;	U2
+;P006;	Airbus A3-400;	assigned;	U2
+;P007;	Boeing 777X;	assigned;	LH
+;P008;	Airbus A320;	available;	LH
+;P009;	MD-80/90-200;	available;	AF
+;P010;	MD-95-200;		available;	AF
+;P011;	Boeing 717-8;	available;	BA
+;P012;	Airbus A3-400;	available;	BA
+;P013;	Boeing 777X;	available;	IB
+;P014;	Boeing 737;		assigned;	IB
+;P015;	Boeing 777X;	assigned;	KL
+;P016;	Boeing 737;		available;	KL
+
+INSERT_UPDATE AirLine; codeAirLine[unique=true];name[unique=true]
+;AZ;	Alitalia
+;FR;	Ryanair
+;U2; 	Easyjet
+;LH; 	Lufthansa
+;AF; 	Air France
+;BA; 	British Airways
+;IB; 	Iberia
+;KL; 	KLM
+
+
+INSERT_UPDATE Route; codeRoute[unique=true];airportDep(codeIATA);airportArr(codeIATA);routeTime
+;GOAGRJ;GOA;GRJ;700
+;BVBCDG;BVB;CDG;650
+;BVBFBU;BVB;FBU;600
+;BVBFCO;BVB;FCO;550
+;BVBGOA;BVB;GOA;700
+;FCOBVB;FCO;BVB;560
+;FCOFLR;FCO;FLR;70
+;FCOGRJ;FCO;GRJ;400
+;FCOGOI;FCO;GOI;400
+;FLRFCO;FLR;FCO;80
+;FLRCDG;FLR;CDG;110
+;FLRBVB;FLR;BVB;600
+;FLRFBU;FLR;FBU;350
+;GOAGDX;GOA;GDX;250
+;FBUGRJ;FBU;GRJ;300
+
+ 
+
+INSERT_UPDATE Flight; codeFlight[unique=true];route(codeRoute);scheduleTimeDep[dateformat = dd.MM.yyyy HH.mm, unique=true, allownull=true];actualTimeDep[dateformat = dd.MM.yyyy HH:mm, allownull=true];stateFlight(code);delay;plane(codePlane)
+;AZGOAGRJ;GOAGRJ;21.12.2018 20.20; ; ; ;P001
+;AZGOAGRJ;GOAGRJ;25.12.2018 20.20; ; ; ;P001  
+;AZBVBCDG;BVBCDG;12.07.2018 13.23; ; ; ;P002
+;AZBVBFBU;BVBFBU;13.05.2018 14.17; ; ; ;P002
+;U2BVBGOA;BVBGOA;14.08.2018 07.30; ; ; ;P005
+;IBFCOGRJ;FCOGRJ;12.12.2019 03.23; ; ; ;P014
+;U2FCOGRJ;FCOGRJ;27.12.2019 12.34; ; ; ;P005
+;KLFCOGRJ;FCOGRJ;24.06.2018 18.34; ; ; ;P015
+;AZBVBGOA;BVBGOA;04.09.2018 20.20; ; ; ;P002
+;U2FLRFCO;FLRFCO;03.11.2019 00.02; ; ; ;P005
+;LHFLRFCO;FLRFCO;07.08.2018 05.45; ; ; ;P007
+;IBFCOGRJ;FCOGRJ;16.12.2019 03.23; ; ; ;P014
+;U2FCOGRJ;FCOGRJ;31.12.2019 12.34; ; ; ;P005
+;KLFCOGRJ;FCOGRJ;29.06.2018 18.34; ; ; ;P015
+;AZBVBGOA;BVBGOA;15.09.2018 20.20; ; ; ;P001
+;U2FLRFCO;FLRFCO;10.11.2019 00.02; ; ; ;P005
+;LHFLRFCO;FLRFCO;23.08.2018 05.45; ; ; ;P007
+;IBFLRFCO;FLRFCO;19.06.2019 14.12; ; ; ;P014
+;KLFLRFCO;FLRFCO;20.02.2020 13.19; ; ; ;P015
+;FRFCOGOI;FCOGOI;13.12.2019 10.10; ; ; ;P003
+;U2FCOGOI;FCOGOI;17.11.2019 13.54; ; ; ;P005
+;AZFCOGOI;FCOGOI;03.02.2018 14.39; ; ; ;P001
+;IBFLRFCO;FLRFCO;20.06.2019 14.12; ; ; ;P014
+;KLFLRFCO;FLRFCO;00.02.2020 13.19; ; ; ;P015
+;FRFCOGOI;FCOGOI;19.12.2019 10.10; ; ; ;P004
+;U2FCOGOI;FCOGOI;20.11.2019 13.54; ; ; ;P006
+;AZFCOGOI;FCOGOI;13.02.2018 14.39; ; ; ;P001
+
+ 
+
+
+INSERT_UPDATE Passenger; uid[unique=true];fiscalCode[unique=true];name;birthday[dateformat = dd.MM.yyyy,allownull=true];sex(code);nationality
+;1;ASB34HD56S;MarioRossi;04.12.1988;MALE;Italy
+;2;GPPRST65DS;GiuseppeRistaino;04.12.1989;MALE;Italy
+;3;GSIGLC67SX;GianlucaGiso;22.06.1991;MALE;Italy
+;4;NSCNTN65SD;AntonioMisco;12.10.1996;MALE;Italy
+;5;MNLMRN67SA;EmanuelMorich;05.06.1991;MALE;Italy
+;6;ADLGNN67ND;AdalgisaGiovannini;22.12.1985;FEMALE;Italy
+;7;POMPSUG67S;PompilioSuglia;01.01.1989;MALE;Italy
+;8;OKSGNCH66A;OksanaGonchar;08.03.1987;FEMALE;Russian
+;9;TOMCAT65AS;TommasoMinichiello;25.12.1989;MALE;Italy
+;10;DNNFRR25DS;DaniloFerrara;03.12.1988;MALE;Italy
+;11;RTFVL64DAS;RitaflaviaMarchesiello;08.11.1993;FEMALE;Italy
+;12;PSUD67SADA;PippoBaudo;12.05.1923;MALE;Italy
+;13;MOR78SASML;LukaModric;26.07.1986;MALE; Croatia
+;14;FRTTSD67SD;FrancescoTotti;07.04.1978;MALE;Italy
+;15;DMN78SDMSD;MikadonoIgushi;12.09.1956;MALE; Japan
+;16;JCKLSD78SA;JokopokoMajoko;28.02.1967;MALE; Japan
+;17;RCCKKKYIS4;RiccardoKaka;22.04.1982;MALE; Brazil
+;18;CLKSBL7384;CholankaSbilenka;15.12.1980;FEMALE; Poland
+;19;MCHSHHH633;MichaelMinichiello;10.12.1918;MALE; USA
+;20;ALLAMM6383;AlessandroAmadori;03.12.1986;MALE; USA
+;21;FLVLINGTT4;FlaviaLinguiti;11.11.1994;FEMALE;Italy
+;22;RBTRSS3888;RobertaRosso;02.08.1991;FEMALE;Italy
+;23;MRAVNRE333;MaraVenier;14.07.1956;FEMALE;Italy
+;24;FRONRO7330;FrancoNero;01.01.1978;MALE;Italy
+;25;PSQNTL6666;PasqualeNatale;13.09.1957;MALE;Italy
+;26;NTNLLL7677;AntonioIlliano;03.12.1967;MALE;Italy
+;27;NBRALL3388;NabirAlbar;11.04.1990;MALE; Iraq
+;28;MMHSLL3738;MohamedAli;12.01.1995;MALE; Spain
+;29;CRLV55555E;CrystalMinichiello;11.06.1928;MALE;Italy
+;30;POMMIN6839;PompilioMorante;03.12.1986;MALE;Italy
+
+
+
+INSERT_UPDATE Booking ; passenger(fiscalCode); flight(codeFlight,scheduleTimeDep[dateformat = dd.MM.yyyy HH.mm])[unique=true]; sit[unique=true]; bookingDate[dateformat = dd.MM.yyyy, allownull=true]
+;CRLV55555E	;AZGOAGRJ : 21.12.2018 20.20	;07	;03.12.2019
+;POMMIN6839 ;AZGOAGRJ : 21.12.2018 20.20	;08	;03.12.2019
+;MMHSLL3738 ;AZGOAGRJ : 21.12.2018 20.20	;09	;03.12.2019
+;GSIGLC67SX ;AZGOAGRJ : 21.12.2018 20.20	;10	;03.12.2019
+;GSIGLC67SX ;U2FCOGOI : 17.11.2019 13.54	;10	;03.12.2019
+;POMMIN6839 ;U2FCOGOI : 17.11.2019 13.54	;11	;03.12.2019
+;POMMIN6839 ;U2FCOGOI : 17.11.2019 13.54	;12	;03.12.2019
+;MNLMRN67SA ;U2FCOGOI : 17.11.2019 13.54	;16	;03.12.2019
+;MNLMRN67SA ;KLFLRFCO : 20.02.2020 13.19	;21 ;03.12.2019
+;ALLAMM6383 ;KLFLRFCO : 20.02.2020 13.19	;24 ;03.12.2019
+;ALLAMM6383 ;U2FLRFCO : 10.11.2019 00.02	;32 ;03.12.2019
+;ASB34HD56S ;FRFCOGOI : 13.12.2019 10.10	;54	;03.12.2019
+;ASB34HD56S ;FRFCOGOI : 13.12.2019 10.10	;55	;03.12.2019
+;TOMCAT65AS ;AZBVBFBU : 13.05.2018 14.17	;65	;03.12.2019
+;TOMCAT65AS ;AZBVBFBU : 13.05.2018 14.17	;66	;03.12.2019
+
+
+

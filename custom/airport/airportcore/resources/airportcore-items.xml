@@ -66,6 +66,20 @@
 
 
 	<relations>
+		<relation localized="false" code="RouteToFlight"
+			autocreate="true" generate="true">
+			<sourceElement type="Route" qualifier="route"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="false" />
+			</sourceElement>
+			<targetElement type="Flight" qualifier="flight"
+				cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		
 		<relation code="AirLineToPlanes" generate="true"
 			localized="false" autocreate="true">
 			<sourceElement qualifier="airline" type="Airline"
@@ -125,11 +139,14 @@
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>
-				<attribute qualifier="city" type="java.lang.String">
+				<attribute qualifier="city"
+					type="localized:java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
+
 				</attribute>
-				<attribute qualifier="country" type="java.lang.String">
+				<attribute qualifier="country"
+					type="localized:java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>
@@ -144,11 +161,7 @@
 		<itemtype code="Flight" generate="true" autocreate="true">
 			<deployment table="flight" typecode="20104" />
 			<attributes>
-				<attribute qualifier="codeFlight" type="Route">
-					<persistence type="property"></persistence>
-					<modifiers optional="false" />
-				</attribute>
-				<attribute qualifier="route" type="Route">
+				<attribute qualifier="codeFlight" type="java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>
@@ -241,11 +254,11 @@
 				</attribute>
 				<attribute qualifier="sex" type="Gender">
 					<persistence type="property"></persistence>
-					<modifiers write="false" />
+					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="nationality" type="java.lang.String">
 					<persistence type="property"></persistence>
-					<modifiers write="false" />
+					<modifiers optional="false" />
 				</attribute>
 			</attributes>
 		</itemtype>
