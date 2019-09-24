@@ -33,48 +33,30 @@
 
 	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"></bean>
 	
-	<alias name="defaultAirportDao" alias="airportDao"/>
-	<bean id="defaultAirportDao" class="it.uiip.airport.core.dao.impl.DefaultAirportDao">
-		<constructor-arg value="#{T(it.uiip.airport.core.model.AirportModel)._TYPECODE}"/>
-	</bean>
+	
+	
 
-	<alias alias="passengerService" name="defaultPassengerService"/>
-	<bean id="defaultPassengerService" class="it.uiip.airport.core.service.impl.DefaultPassengerService" 
-					parent="defaultUserService">
-					<property name="passengerDao" ref="passengerDao"></property>
-	
-	</bean>
-	
-	<alias alias="airportService" name="defaultAirportService"/>
-	<bean id="defaultAirportService" class="it.uiip.airport.core.service.impl.DefaultAirportService" >
-		<property name="airportDao" ref="airportDao"></property>
-	</bean>
-	
-	
-	<alias name="defaultFlightDao" alias="flightDao"/>
-	<bean id="defaultFlightDao" class="it.uiip.airport.core.dao.impl.DefaultFlightDao">
-		<constructor-arg value="#{T(it.uiip.airport.core.model.FlightModel)._TYPECODE}"/>
-	</bean>
-	
-	<alias name="defaultPlaneDao" alias="planeDao"/>
-	<bean id="defaultPlaneDao" class="it.uiip.airport.core.dao.impl.DefaultPlaneDao">
-		<constructor-arg value="#{T(it.uiip.airport.core.model.PlaneModel)._TYPECODE}"/>
-	</bean>
-	
-	<alias name="defaultPlaneService" alias="planeService"/>
-	<bean id="defaultPlaneService" class="it.uiip.airport.core.service.impl.DefaultPlaneService">
-	<property name="planeDao" ref="planeDao"></property>
-	</bean>
-	
-	<alias name="defaultPassengerDao" alias="passengerDao"/>
-	<bean id="defaultPassengerDao" class="it.uiip.airport.core.dao.impl.DefaultPassengerDao">
-		<constructor-arg value="#{T(it.uiip.airport.core.model.PassengerModel)._TYPECODE}"/>
-	</bean>
-	
-	<alias alias="flightService" name="defaultFlightService"/>
-	<bean id="defaultFlightService" class="it.uiip.airport.core.service.impl.DefaultFlightService" >
-		<property name="flightDao" ref="flightDao"></property>
-	</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<bean id="volumeAwareProductPriceValueProvider" class="it.uiip.airport.core.search.solrfacetsearch.provider.impl.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">
         <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
@@ -87,6 +69,7 @@
     </bean>
 
     <bean id="volumePriceComparator" class="it.uiip.airport.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton"/>
+
 
     <bean id="productVolumePricesProvider" class="it.uiip.airport.core.search.solrfacetsearch.provider.impl.ProductVolumePricesProvider"  parent="abstractPropertyFieldValueProvider">
         <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
