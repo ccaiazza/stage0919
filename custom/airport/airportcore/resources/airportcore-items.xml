@@ -170,7 +170,7 @@
 				<attribute qualifier="scheduleTimeDeparture"
 					type="java.util.Date">
 					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="actualTimeDeparture" type="java.util.Date">
 					<persistence type="property"></persistence>
@@ -178,7 +178,7 @@
 				</attribute>
 				<attribute qualifier="stateFlight" type="stateFlightEnum">
 					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="delay" type="java.lang.Integer">
 					<persistence type="property"></persistence>
@@ -186,7 +186,7 @@
 				</attribute>
 				<attribute qualifier="plane" type="Plane">
 					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<modifiers optional="false" />
 				</attribute>
 			</attributes>
 		</itemtype>
