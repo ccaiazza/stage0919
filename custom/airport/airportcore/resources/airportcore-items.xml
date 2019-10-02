@@ -145,12 +145,12 @@
 				<attribute qualifier="city"
 					type="localized:java.lang.String">
 					<persistence type="property"></persistence>
-					<modifiers optional="false" />
+					<modifiers optional="true" />
 				</attribute>
 				<attribute qualifier="country"
 					type="localized:java.lang.String">
 					<persistence type="property"></persistence>
-					<modifiers optional="false" />
+					<modifiers optional="true" />
 				</attribute>
 				<attribute qualifier="runways" type="java.lang.Integer">
 					<persistence type="property"></persistence>

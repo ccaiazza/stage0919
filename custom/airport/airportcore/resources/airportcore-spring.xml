@@ -21,6 +21,7 @@
      <context:annotation-config/>
 
 	<!-- Spring Integration -->
+	<import resource="classpath:/airportcore/integration/hot-folder-airport-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-common-spring.xml"/>
@@ -33,8 +34,28 @@
 
 	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"></bean>
 	
+	<!-- DAO BEAN -->
+	
+	<alias alias="airLineDao"  name="defaultAirLineDao" />
+	<bean id="defaultAirLineDao" class="it.uiip.airport.core.dao.impl.DefaultAirLineDao">
+		<constructor-arg value="#{T(it.uiip.airport.core.model.AirLineModel)._TYPECODE}"/>
+	</bean>
 	
 	
+	<!-- SERVICE BEAN -->
+	
+	<alias alias="airLineService" name="defaultAirLineService"/>
+	<bean id="defaultAirLineService" class="it.uiip.airport.core.service.impl.DefaultAirLineService" >
+		<property name="airLineDao" ref="airLineDao"></property>
+	</bean>
+	
+	<!-- IMPEX.ROW.FILTER BEAN -->
+	
+	<bean id="planeImpexRowFilter" class="it.uiip.airport.core.impexFilterRow.PlaneImpexRowFilter">
+		<property name="airLineService" ref="airLineService"></property>
+	</bean>
+	
+	<!-- ___________________________________________________________________________________________ -->
 
 
 

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:int="http://www.springframework.org/schema/integration"
+    xmlns:file="http://www.springframework.org/schema/integration/file"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/integration 
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/file 
+    http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+ 
+
+    <context:annotation-config/> 
+
+ 
+
+    <bean id="baseDirectoryAirport" class="java.lang.String">
+        <constructor-arg value="#{baseDirectory}/${tenantId}/airport" />
+    </bean>
+    
+    <!-- 1) Scan for files -->
+    <file:inbound-channel-adapter id="batchFilesAirport" directory="#{baseDirectoryAirport}"
+        filename-regex="^(.*)-(\d+)\.csv" comparator="fileOrderComparator">
+        <int:poller fixed-rate="1000" />
+    </file:inbound-channel-adapter>
+    
+    
+    <!-- Move the file to processing and start the flow -->
+    <file:outbound-gateway request-channel="batchFilesAirport" reply-channel="batchFilesAirportProc"
+                           directory="#{baseDirectoryAirport}/processing"
+                           delete-source-files="true" />
+                           
+    <!-- Initialize the batch header with relevant information -->
+    <int:service-activator input-channel="batchFilesAirportProc" output-channel="batchFilesHeaderInit"
+                           ref="airportHeaderSetupTask"
+                           method="execute" />
+                           
+                           
+    <bean id="airportHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+        <property name="catalog" value="airportCatalog" />
+        <property name="net" value="false" />
+        <property name="storeBaseDirectory" ref="baseDirectoryAirport" />
+    </bean>                   
+
+ 
+
+
+    <!-- CONVERTER -->
+    
+    <bean id="airportConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Airport; codeIATA[unique=true]; name; city[lang=$lang]; country[lang=$lang]; runways
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{3};{4}</value>
+        </property>
+    </bean>
+    <bean id="planeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Plane; codePlane[unique=true];model(code);statePlane(code); numberMaxSits; goods;airline(codeAirLine)
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{3};{4};{5}</value>
+        </property>
+        <property name="rowFilter">
+			<bean class="it.uiip.airport.core.impexFilterRow.PlaneImpexRowFilter">
+				<property name="airLineService" ref="airLineService"/>
+				
+			</bean>
+		</property>
+    </bean>
+    <bean id="airlineConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE AirLine; codeAirLine[unique=true]; name
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{+1}</value>
+        </property>
+    </bean>
+    <bean id="routeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Route; codeRoute[unique=true];airportDeparture(codeIATA);airportArrival(codeIATA);routeTime
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{3}</value>
+        </property>
+    </bean>
+    <bean id="flightConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Flight; codeFlight[unique=true];route(codeRoute);scheduleTimeDeparture[dateformat = dd.MM.yyyy HH.mm, unique=true, allownull=true];actualTimeDeparture[dateformat = dd.MM.yyyy HH:mm, allownull=true];stateFlight(code);delay;plane(codePlane)
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{3};{4};{5};{6}</value>
+        </property>
+    </bean>
+    <bean id="passengerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Passenger; uid[unique=true];fiscalCode[unique=true];name;birthday[dateformat = dd.MM.yyyy,allownull=true];sex(code);nationality
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{+1};{2};{3};{4};{5}</value>
+        </property>
+    </bean>
+    <bean id="bookingConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Booking ; passenger(fiscalCode); flight(codeFlight,scheduleTimeDeparture[dateformat = dd.MM.yyyy HH.mm])[unique=true]; sit[unique=true]; bookingDate[dateformat = dd.MM.yyyy, allownull=true]
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{+1};{2};{3}</value>
+        </property>
+    </bean>
+    
+    
+    <!-- MAPPING -->
+
+    <bean id="airportConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="airport"
+          p:converter-ref="airportConverter"/>
+    <bean id="planeConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="plane"
+          p:converter-ref="planeConverter"/>
+    <bean id="airlineConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="airline"
+          p:converter-ref="airlineConverter"/>
+    <bean id="routeConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="route"
+          p:converter-ref="routeConverter"/>
+    <bean id="flightConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="flight"
+          p:converter-ref="flightConverter"/>
+    <bean id="passengerConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="passenger"
+          p:converter-ref="passengerConverter"/>
+    <bean id="bookingConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="booking"
+          p:converter-ref="bookingConverter"/>      
+          
+</beans>
