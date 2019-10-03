@@ -1,6 +1,8 @@
 package it.uiip.airport.core.dao.impl;
 
 import java.util.List;
+
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
@@ -17,13 +19,13 @@ public class DefaultAirLineDao extends DefaultGenericDao<AirLineModel> implement
 	}
 	
 	@Override
-	public boolean findAirLineByCodeAirLine(String codeAirLine) {
+	public AirLineModel findAirLineByCodeAirLine(String codeAirLine) {
 		final StringBuilder queryStr = new StringBuilder();
 		queryStr.append("SELECT {A.pk} FROM {AirLine AS A} WHERE {A.codeAirLine} = ?codeAirLine");
 		final FlexibleSearchQuery fsq = new FlexibleSearchQuery(queryStr);
 		fsq.addQueryParameter("codeAirLine", codeAirLine);
-		final SearchResult<AirLineModel> result = getFlexibleSearchService().search(fsq);
-		return !result.getResult().isEmpty();
+		final AirLineModel result	= getFlexibleSearchService().searchUnique(fsq);
+		return result;
 	}
 
 	

@@ -32,7 +32,7 @@
 
 	<!-- Solr field value providers -->
 
-	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"></bean>
+	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"/>
 	
 	<!-- DAO BEAN -->
 	
@@ -46,13 +46,13 @@
 	
 	<alias alias="airLineService" name="defaultAirLineService"/>
 	<bean id="defaultAirLineService" class="it.uiip.airport.core.service.impl.DefaultAirLineService" >
-		<property name="airLineDao" ref="airLineDao"></property>
+		<property name="airLineDao" ref="airLineDao"/>
 	</bean>
 	
 	<!-- IMPEX.ROW.FILTER BEAN -->
 	
 	<bean id="planeImpexRowFilter" class="it.uiip.airport.core.impexFilterRow.PlaneImpexRowFilter">
-		<property name="airLineService" ref="airLineService"></property>
+		<property name="airLineService" ref="airLineService"/>
 	</bean>
 	
 	<!-- ___________________________________________________________________________________________ -->

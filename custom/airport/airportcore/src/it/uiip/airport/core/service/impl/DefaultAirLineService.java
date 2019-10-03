@@ -1,6 +1,5 @@
 package it.uiip.airport.core.service.impl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -24,7 +23,7 @@ public class DefaultAirLineService implements AirLineService {
 
 
 	@Override
-	public boolean getAirLineForCodeAirLine(String codeAirLine) {
+	public AirLineModel getAirLineForCodeAirLine(String codeAirLine) {
 		return airLineDao.findAirLineByCodeAirLine(codeAirLine);
 	}
 

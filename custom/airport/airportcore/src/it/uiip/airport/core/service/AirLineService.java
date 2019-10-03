@@ -1,10 +1,10 @@
 package it.uiip.airport.core.service;
 
-import java.util.List;
+
 
 import it.uiip.airport.core.model.AirLineModel;
 
 public interface AirLineService {
 
-	public boolean getAirLineForCodeAirLine(String codeAirLine);
+	public AirLineModel getAirLineForCodeAirLine(String codeAirLine);
 }
