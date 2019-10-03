@@ -6,6 +6,7 @@ package it.uiip.airport.core.service.impl;
 import org.springframework.beans.factory.annotation.Required;
 
 import it.uiip.airport.core.dao.AirportDao;
+import it.uiip.airport.core.model.AirportModel;
 import it.uiip.airport.core.service.AirportService;
 
 /**
@@ -17,7 +18,7 @@ public class DefaultAirportService implements AirportService
 	private AirportDao airportDao;
 
 	@Override
-	public boolean getAirportForCodeIATA(final String codeIATA)
+	public AirportModel getAirportForCodeIATA(final String codeIATA)
 	{
 		return airportDao.findAirportByCodeIATA(codeIATA);
 	}

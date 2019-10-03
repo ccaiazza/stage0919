@@ -42,7 +42,7 @@
 	
 	<alias alias="airportService" name="defaultAirportService"/>
 	<bean id="defaultAirportService" class="it.uiip.airport.core.service.impl.DefaultAirportService" >
-		<property name="airportDao" ref="airportDao"></property>
+		<property name="airportDao" ref="airportDao"/>
 	</bean>
 
 	
@@ -57,7 +57,7 @@
 
 
 
-	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"></bean>
+	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"/>
 	
 
 

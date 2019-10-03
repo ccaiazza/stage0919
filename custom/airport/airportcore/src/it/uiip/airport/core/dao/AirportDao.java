@@ -14,5 +14,5 @@ import it.uiip.airport.core.model.AirportModel;
  */
 public interface AirportDao extends GenericDao<AirportModel>
 {
-	public boolean findAirportByCodeIATA(String codeIATA);
+	public AirportModel findAirportByCodeIATA(String codeIATA);
 }

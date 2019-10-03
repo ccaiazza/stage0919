@@ -3,13 +3,16 @@
  */
 package it.uiip.airport.core.service;
 
+import it.uiip.airport.core.model.AirportModel;
+
+
 /**
  * @author tminichiello
  *
  */
 public interface AirportService
 {
-	public boolean getAirportForCodeIATA(String codeIata);
+	public AirportModel getAirportForCodeIATA(String codeIata);
 }
 
 
