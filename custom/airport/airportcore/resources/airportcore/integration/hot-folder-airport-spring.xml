@@ -42,7 +42,19 @@
 		<property name="catalog" value="airportCatalog" />
 		<property name="net" value="false" />
 		<property name="storeBaseDirectory" ref="baseDirectoryAirport" />
-	</bean>				   
+	</bean>		
+	
+	<!-- 3) transform csv to impex file -->
+	<int:service-activator input-channel="batchFilesHeader" output-channel="batchFilesTran" ref="batchTransformerTask"
+		method="execute" />
+	<bean id="batchTransformerTask" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.task.ImpexTransformerTask" 
+		  init-method="initConvertersMap">
+		<property name="fieldSeparator" value=";" />
+		<property name="encoding" value="UTF-8" />
+		<property name="linesToSkip" value="0"/>
+		<property name="cleanupHelper" ref="cleanupHelper" />
+	</bean>		   
 
 
 	<!-- ________________________________________________CONVERTER___________________________________________________ -->
