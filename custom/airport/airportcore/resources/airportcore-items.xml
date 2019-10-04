@@ -143,13 +143,11 @@
 					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
-				<attribute qualifier="city"
-					type="localized:java.lang.String">
+				<attribute qualifier="city" type="localized:java.lang.String">
 					<persistence type="property"></persistence>
 					<modifiers optional="false" />
 				</attribute>
-				<attribute qualifier="country"
-					type="localized:java.lang.String">
+				<attribute qualifier="country" type="localized:java.lang.String">
 					<persistence type="property" />
 					<modifiers optional="false"/>
 				</attribute>
