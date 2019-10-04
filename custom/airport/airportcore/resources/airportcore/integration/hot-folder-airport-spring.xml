@@ -73,18 +73,23 @@
 	</bean>
 	
 	<!-- PlaneModel impex converter -->
-	<bean id="planeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
-		<property name="header">
-			<value>
-				#{defaultImpexProductHeader}
-				INSERT_UPDATE Plane; codePlane[unique=true];model(code);statePlane(code); numberMaxSits; goods;airline(codeAirLine)
-			</value>
-		</property>
-		<property name="impexRow">
-			<value>;{+0};{1};{2};{3};{4};{5}</value>
-		</property>
-		
-	</bean>
+	  <bean id="planeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>
+                #{defaultImpexProductHeader}
+                INSERT_UPDATE Plane; codePlane[unique=true];model(code);statePlane(code);numberMaxSits;goods;airline(codeAirLine)
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{1};{2};{3};{4};{5}</value>
+        </property>
+        <property name="rowFilter">
+            <bean
+                class="it.uiip.airport.core.impexFilterRow.PlaneImpexRowFilter">
+                <property name="airLineService" ref="airLineService" />
+            </bean>
+        </property>
+    </bean>
 	
 	<!-- AirlineModel impex converter -->
 	<bean id="airlineConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -204,3 +209,4 @@
 		  
 	
 </beans>
+
