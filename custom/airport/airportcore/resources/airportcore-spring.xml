@@ -21,6 +21,7 @@
      <context:annotation-config/>
 
 	<!-- Spring Integration -->
+	<import resource="classpath:/airportcore/integration/hot-folder-airport-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/airportcore/integration/hot-folder-common-spring.xml"/>
@@ -31,31 +32,33 @@
 
 	<!-- Solr field value providers -->
 
-	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"></bean>
+	<!-- ______________________________________BEAN___________________________________ -->
+
+
+	<alias name="defaultAirportDao" alias="airportDao"/>
+	<bean id="defaultAirportDao" class="it.uiip.airport.core.dao.impl.DefaultAirportDao">
+		<constructor-arg value="#{T(it.uiip.airport.core.model.AirportModel)._TYPECODE}"/>
+	</bean>
 	
+	<alias alias="airportService" name="defaultAirportService"/>
+	<bean id="defaultAirportService" class="it.uiip.airport.core.service.impl.DefaultAirportService" >
+		<property name="airportDao" ref="airportDao"/>
+	</bean>
+
 	
+
+
+
+
+
+
+
+
+
+
+
+	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"/>
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<bean id="volumeAwareProductPriceValueProvider" class="it.uiip.airport.core.search.solrfacetsearch.provider.impl.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">

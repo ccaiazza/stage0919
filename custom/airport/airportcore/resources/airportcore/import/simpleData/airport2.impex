@@ -121,7 +121,7 @@ INSERT_UPDATE Passenger; uid[unique=true];fiscalCode[unique=true];name;birthday[
 ;30;POMMIN6839;PompilioMorante;03.12.1986;MALE;Italy
 
 
-INSERT_UPDATE Booking ; passenger(fiscalCode); flight(codeFlight,scheduleTimeDep[dateformat = dd.MM.yyyy HH.mm])[unique=true]; sit[unique=true]; bookingDate[dateformat = dd.MM.yyyy, allownull=true]
+INSERT_UPDATE Booking ; passenger(fiscalCode); flight(codeFlight,scheduleTimeDeparture[dateformat = dd.MM.yyyy HH.mm])[unique=true]; sit[unique=true]; bookingDate[dateformat = dd.MM.yyyy, allownull=true]
 ;CRLV55555E	;AZGOAGRJ : 21.12.2018 20.20	;07	;03.12.2019
 ;POMMIN6839 ;AZGOAGRJ : 21.12.2018 20.20	;08	;03.12.2019
 ;MMHSLL3738 ;AZGOAGRJ : 21.12.2018 20.20	;09	;03.12.2019
