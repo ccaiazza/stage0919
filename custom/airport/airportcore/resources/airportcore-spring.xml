@@ -31,8 +31,6 @@
 	       parent="abstractCoreSystemSetup"/>
 
 	<!-- Solr field value providers -->
-
-	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"/>
 	
 	<!-- DAO BEAN -->
 	
@@ -49,34 +47,9 @@
 		<property name="airLineDao" ref="airLineDao"/>
 	</bean>
 	
-	<!-- IMPEX.ROW.FILTER BEAN -->
+
+	<bean id="agePassengerHandler" class="it.uiip.airport.core.handler.AgePassengerHandler"/>
 	
-	<bean id="planeImpexRowFilter" class="it.uiip.airport.core.impexFilterRow.PlaneImpexRowFilter">
-		<property name="airLineService" ref="airLineService"/>
-	</bean>
-	
-	<!-- ___________________________________________________________________________________________ -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<bean id="volumeAwareProductPriceValueProvider" class="it.uiip.airport.core.search.solrfacetsearch.provider.impl.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">

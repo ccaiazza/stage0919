@@ -45,20 +45,21 @@
 
 		<enumtype generate="true" code="stateFlightEnum"
 			autocreate="true" dynamic="true">
-			<value code="CANCELLED"></value>
-			<value code="TO_FLIGHT"></value>
-			<value code="LANDED"></value>
+			<value code="CANCELLED" />
+			<value code="TO_FLIGHT" />
+			<value code="LANDED" />
+			<value code="SCHEDULED" />
 		</enumtype>
-		
+
 		<enumtype generate="true" code="modelPlaneEnum"
 			autocreate="true" dynamic="true">
-			<value code="BOEING_737"></value>
-			<value code="BOEING_717"></value>
-			<value code="BOEING_777X"></value>
-			<value code="MD_80_90"></value>
-			<value code="MD_95_200"></value>
-			<value code="AIRBUS_A320"></value>
-			<value code="AIRBUS_A300"></value>	
+			<value code="BOEING_737" />
+			<value code="BOEING_717" />
+			<value code="BOEING_777X" />
+			<value code="MD_80_90" />
+			<value code="MD_95_200" />
+			<value code="AIRBUS_A320" />
+			<value code="AIRBUS_A300" />
 		</enumtype>
 
 
@@ -82,7 +83,7 @@
 					optional="true" />
 			</targetElement>
 		</relation>
-		
+
 		<relation code="AirLineToPlanes" generate="true"
 			localized="false" autocreate="true">
 			<sourceElement qualifier="airline" type="Airline"
@@ -135,25 +136,25 @@
 			<deployment table="airport" typecode="20101" />
 			<attributes>
 				<attribute qualifier="codeIATA" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="name" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="city"
 					type="localized:java.lang.String">
 					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="country"
 					type="localized:java.lang.String">
-					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<persistence type="property" />
+					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="runways" type="java.lang.Integer">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="true" />
 				</attribute>
 			</attributes>
@@ -164,29 +165,31 @@
 			<deployment table="flight" typecode="20104" />
 			<attributes>
 				<attribute qualifier="codeFlight" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="scheduleTimeDeparture"
 					type="java.util.Date">
-					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<persistence type="property" />
+					<modifiers optional="false" />
 				</attribute>
-				<attribute qualifier="actualTimeDeparture" type="java.util.Date">
-					<persistence type="property"></persistence>
+				<attribute qualifier="actualTimeDeparture"
+					type="java.util.Date">
+					<persistence type="property" />
 					<modifiers optional="true" />
 				</attribute>
 				<attribute qualifier="stateFlight" type="stateFlightEnum">
-					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>stateFlightEnum.SCHEDULED</defaultvalue>
 				</attribute>
 				<attribute qualifier="delay" type="java.lang.Integer">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="true" />
 				</attribute>
 				<attribute qualifier="plane" type="Plane">
-					<persistence type="property"></persistence>
-					<modifiers optional="true" />
+					<persistence type="property" />
+					<modifiers optional="false" />
 				</attribute>
 			</attributes>
 		</itemtype>
@@ -196,11 +199,11 @@
 			<deployment table="airline" typecode="20102" />
 			<attributes>
 				<attribute qualifier="codeAirLine" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="name" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 			</attributes>
@@ -210,23 +213,25 @@
 			<deployment table="plane" typecode="20105" />
 			<attributes>
 				<attribute qualifier="codePlane" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="model" type="modelPlaneEnum">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="statePlane" type="statePlaneEnum">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
+					<defaultvalue>statePlaneEnum.AVAILABLE</defaultvalue>
 				</attribute>
-				<attribute qualifier="numberMaxSits" type="java.lang.Integer">
-					<persistence type="property"></persistence>
+				<attribute qualifier="numberMaxSits"
+					type="java.lang.Integer">
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="goods" type="java.lang.Integer">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 			</attributes>
@@ -238,19 +243,19 @@
 			<deployment table="passenger" typecode="20107" />
 			<attributes>
 				<attribute qualifier="fiscalCode" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="birthday" type="java.util.Date">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="sex" type="Gender">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="nationality" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 			</attributes>
@@ -261,19 +266,19 @@
 			<deployment table="route" typecode="20103" />
 			<attributes>
 				<attribute qualifier="codeRoute" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="airportDeparture" type="Airport">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="airportArrival" type="Airport">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="routeTime" type="java.lang.Integer">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 			</attributes>
@@ -283,11 +288,11 @@
 			<deployment table="booking" typecode="20108" />
 			<attributes>
 				<attribute qualifier="sit" type="java.lang.String">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 				<attribute qualifier="bookingDate" type="java.util.Date">
-					<persistence type="property"></persistence>
+					<persistence type="property" />
 					<modifiers optional="false" />
 				</attribute>
 			</attributes>
