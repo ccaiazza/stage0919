@@ -3,6 +3,8 @@
  */
 package it.uiip.airport.core.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Required;
 
 import it.uiip.airport.core.dao.AirportDao;
@@ -24,6 +26,19 @@ public class DefaultAirportService implements AirportService
 	}
 
 
+	@Override
+	public List<AirportModel> getAllAirports()
+	{
+		return airportDao.findAllAirports();
+	}
+
+
+
+	@Override
+	public List<AirportModel> getAirportsForCountry(final String country)
+	{
+		return airportDao.findAirportsByCountry(country);
+	}
 
 	public AirportDao getAirportDao()
 	{

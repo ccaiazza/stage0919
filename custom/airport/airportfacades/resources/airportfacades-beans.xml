@@ -28,31 +28,12 @@
 		<property name="runways" type="Integer"/>
 	</bean>
 	
-	<bean class="it.uiip.airport.facades.data.PlaneData">
-		<property name="codePlane" type="String"/>
-		<property name="typePlane" type="String"/>
-		<property name="numOfSits" type="Integer"/>
-		<property name="goods" type="Integer"/>
+	<bean class="it.uiip.airport.facades.data.RouteData">
+		<property name="codeRoute" type="String"/>
+		<property name="airportDeparture" type="it.uiip.airport.facades.data.AirportData"/>
+		<property name="airportArrival" type="it.uiip.airport.facades.data.AirportData"/>
+		<property name="routeTime" type="Integer"/>
 	</bean>
 	
-	<bean class="it.uiip.airport.facades.data.FlightData">
-		<property name="codeFlight" type="String"/>
-		<property name="weekDay" type="String"/>
-		<property name="airportDep" 
-		type="it.uiip.airport.facades.data.AirportData"/>
-		<property name="airportArr" 
-		type="it.uiip.airport.facades.data.AirportData"/>
-		<property name="plane" 
-		type="it.uiip.airport.facades.data.PlaneData"/>
-		<property name="timeDep" type="Integer"/>
-		<property name="timeArr" type="Integer"/>
-	</bean>
 	
-	<bean class="it.uiip.airport.facades.data.PassengerData">
- 		<property name="codeFiscal" type="String"></property>
- 		<property name="name" type="String"></property>
- 		<property name="birthday" type="java.util.Date"></property>
- 		<property name="age" type="Integer"></property>
-	</bean>
-
 </beans>

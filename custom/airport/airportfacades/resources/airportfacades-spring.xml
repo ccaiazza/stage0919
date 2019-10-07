@@ -13,16 +13,17 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:annotation-config />
-<!-- 
+ 
+ <!-- _____________________AIRPORT____________________ -->
 	<alias alias="airportFacade" name="defaultAirportFacade" />
 	<bean id="defaultAirportFacade"
 		class="it.uiip.airport.facades.impl.DefaultAirportFacade">
 		<property name="airportService" ref="airportService" />
-		<property name="airportConverter" ref="airportConverter" />
+		<property name="airportConverterFacade" ref="airportConverterFacade" />
 	</bean>
 
  
-	<alias alias="airportConverter" name="defaultAirportConverter" />
+	<alias alias="airportConverterFacade" name="defaultAirportConverter" />
 	<bean id="defaultAirportConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
@@ -38,8 +39,36 @@
 	<bean id="defaultAirportPopulator"
 		class="it.uiip.airport.facades.populators.AirportPopulator">
 	</bean>
+	
+	 <!-- _____________________ROUTE____________________ -->
+	 
+	<alias alias="routeFacade" name="defaultRouteFacade" />
+	<bean id="defaultRouteFacade"
+		class="it.uiip.airport.facades.impl.DefaultRouteFacade">
+		<property name="routeFlightService" ref="routeFlightService" />
+		<property name="routeConverterFacade" ref="routeConverterFacade" />
+	</bean>
 
--->
+ 
+	<alias alias="routeConverterFacade" name="defaultRouteConverter" />
+	<bean id="defaultRouteConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.RouteData" />
+		<property name="populators">
+			<list>
+				<ref bean="routePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultRoutePopulator" alias="routePopulator" />
+	<bean id="defaultRoutePopulator"
+		class="it.uiip.airport.facades.populators.RoutePopulator">
+		<property name="airportConverterFacade" ref="airportConverterFacade"/>
+	</bean>
+
+
 
 	
 

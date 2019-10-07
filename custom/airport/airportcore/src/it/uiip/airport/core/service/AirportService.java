@@ -3,6 +3,8 @@
  */
 package it.uiip.airport.core.service;
 
+import java.util.List;
+
 import it.uiip.airport.core.model.AirportModel;
 
 
@@ -13,6 +15,10 @@ import it.uiip.airport.core.model.AirportModel;
 public interface AirportService
 {
 	public AirportModel getAirportForCodeIATA(String codeIata);
+
+	public List<AirportModel> getAllAirports();
+
+	public List<AirportModel> getAirportsForCountry(String country);
 }
 
 
