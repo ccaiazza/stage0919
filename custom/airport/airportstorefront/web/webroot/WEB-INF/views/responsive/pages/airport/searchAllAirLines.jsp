@@ -3,13 +3,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>AirportList</title>
+<title>AirLinesList</title>
 </head>
 <body>
-	<h1>Airport Listing</h1>
+	<h1>AirLines Listing</h1>
 	<ul>
-		<c:forEach var="airport" items="${airports}">
-			<li>${airport.name}</li>
+		<c:forEach var="airLine" items="${airLines}">
+			<li>${airLine.codeAirLine} - ${airLine.name}</li>
 		</c:forEach>
 	</ul>
 </body>

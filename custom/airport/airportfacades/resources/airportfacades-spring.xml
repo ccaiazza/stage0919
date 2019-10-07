@@ -11,35 +11,61 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-
+	
 	<context:annotation-config />
-<!-- 
-	<alias alias="airportFacade" name="defaultAirportFacade" />
-	<bean id="defaultAirportFacade"
-		class="it.uiip.airport.facades.impl.DefaultAirportFacade">
-		<property name="airportService" ref="airportService" />
-		<property name="airportConverter" ref="airportConverter" />
+	
+	<!-- FACADES BEAN -->
+	
+	<alias alias="airLineFacade" name="defaultAirLineFacade" />
+	<bean id="defaultAirLineFacade" class="it.uiip.airport.facades.impl.DefaultAirLineFacade">
+		<property name="airLineService" ref="airLineService" />
+		<property name="airLineConverter" ref="airLineConverterFacade" />
 	</bean>
-
- 
-	<alias alias="airportConverter" name="defaultAirportConverter" />
-	<bean id="defaultAirportConverter"
+	
+	<alias name="defaultPlaneFacade" alias="planeFacade"/>
+	<bean id="defaultPlaneFacade" class="it.uiip.airport.facades.impl.DefaultPlaneFacade">
+		<property name="planeService" ref="planeService"/>
+		<property name="planeConverter" ref="planeConverterFacade"/>
+	</bean>
+	
+	<!-- COVERTER BEAN -->
+		<alias alias="airLineConverterFacade" name="defaultAirLineConverter" />
+	<bean id="defaultAirLineConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
-			value="it.uiip.airport.facades.data.AirportData" />
+			value="it.uiip.airport.facades.data.AirLineData" />
 		<property name="populators">
 			<list>
-				<ref bean="airportPopulator" />
+				<ref bean="airLinePopulator" />
 			</list>
 		</property>
 	</bean>
-
-	<alias name="defaultAirportPopulator" alias="airportPopulator" />
-	<bean id="defaultAirportPopulator"
-		class="it.uiip.airport.facades.populators.AirportPopulator">
+	
+	<alias alias="planeConverterFacade" name="defaultPlaneConverter" />
+	<bean id="defaultPlaneConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.facades.data.PlaneData" />
+		<property name="populators">
+			<list>
+				<ref bean="planePopulator" />
+			</list>
+		</property>
 	</bean>
-
--->
+	
+	
+	<!-- POPULATOR BEAN -->
+	<alias name="defaultAirLinePopulator" alias="airLinePopulator" />
+	<bean id="defaultAirLinePopulator"
+		class="it.uiip.airport.facades.populators.AirLinePopulator">
+	</bean>
+	
+	<alias name="defaultPlanePopulator" alias="planePopulator" />
+	<bean id="defaultPlanePopulator"
+		class="it.uiip.airport.facades.populators.PlanePopulator">
+		<property name="airLineConverter" ref="airLineConverterFacade"/>
+	</bean>
+	
 
 	
 

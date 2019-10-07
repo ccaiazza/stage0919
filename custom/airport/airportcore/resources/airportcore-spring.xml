@@ -47,7 +47,12 @@
 		<constructor-arg
 			value="#{T(it.uiip.airport.core.model.AirportModel)._TYPECODE}" />
 	</bean>
-
+	
+	<alias name="defaultPlaneDao" alias="planeDao"/>
+		<bean id="defaultPlaneDao" class=" it.uiip.airport.core.dao.impl.DefaultPlaneDao">
+			<constructor-arg
+			value="#{T(it.uiip.airport.core.model.PlaneModel)._TYPECODE}" />
+		</bean>
 
 	<!-- SERVICE BEAN -->
 
@@ -63,7 +68,10 @@
 		<property name="airportDao" ref="airportDao" />
 	</bean>
 
-
+	<alias name="defaultPlaneService" alias="planeService"/>
+	<bean id="defaultPlaneService" class="it.uiip.airport.core.service.impl.DefaultPlaneService">
+		<property name="planeDao" ref="planeDao" ></property>
+	</bean>
 
 
 

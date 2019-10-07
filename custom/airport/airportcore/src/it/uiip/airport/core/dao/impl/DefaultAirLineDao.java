@@ -28,6 +28,17 @@ public class DefaultAirLineDao extends DefaultGenericDao<AirLineModel> implement
 		return result;
 	}
 
+
+	@Override
+	public List<AirLineModel> findAllAirLines() {
+		final StringBuilder queryStr = new StringBuilder();
+		queryStr.append("SELECT {A.pk} FROM {AirLine AS A}");
+		final FlexibleSearchQuery fsq = new FlexibleSearchQuery(queryStr);
+		final SearchResult<AirLineModel> result	= getFlexibleSearchService().search(fsq);
+		return result.getResult();
+		
+	}
+
 	
 
 }
