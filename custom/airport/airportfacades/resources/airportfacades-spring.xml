@@ -15,15 +15,16 @@
 	<context:annotation-config />
  
  <!-- _____________________AIRPORT____________________ -->
+ 
 	<alias alias="airportFacade" name="defaultAirportFacade" />
 	<bean id="defaultAirportFacade"
 		class="it.uiip.airport.facades.impl.DefaultAirportFacade">
 		<property name="airportService" ref="airportService" />
-		<property name="airportConverterFacade" ref="airportConverterFacade" />
+		<property name="airportConverter" ref="airportConverter" />
 	</bean>
 
  
-	<alias alias="airportConverterFacade" name="defaultAirportConverter" />
+	<alias alias="airportConverter" name="defaultAirportConverter" />
 	<bean id="defaultAirportConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
@@ -46,11 +47,11 @@
 	<bean id="defaultRouteFacade"
 		class="it.uiip.airport.facades.impl.DefaultRouteFacade">
 		<property name="routeFlightService" ref="routeFlightService" />
-		<property name="routeConverterFacade" ref="routeConverterFacade" />
+		<property name="routeConverter" ref="routeConverter" />
 	</bean>
 
  
-	<alias alias="routeConverterFacade" name="defaultRouteConverter" />
+	<alias alias="routeConverter" name="defaultRouteConverter" />
 	<bean id="defaultRouteConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
@@ -65,7 +66,7 @@
 	<alias name="defaultRoutePopulator" alias="routePopulator" />
 	<bean id="defaultRoutePopulator"
 		class="it.uiip.airport.facades.populators.RoutePopulator">
-		<property name="airportConverterFacade" ref="airportConverterFacade"/>
+		<property name="airportConverter" ref="airportConverter"/>
 	</bean>
 
 

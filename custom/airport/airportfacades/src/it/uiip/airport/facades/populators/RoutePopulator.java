@@ -21,29 +21,41 @@ import it.uiip.airport.facades.data.RouteData;
  */
 public class RoutePopulator implements Populator<RouteModel, RouteData>
 {
-	private Converter<AirportModel, AirportData> airportConverterFacade;
+	private Converter<AirportModel, AirportData> airportConverter;
 
 	@Override
 	public void populate(final RouteModel source, final RouteData target) throws ConversionException
 	{
-		target.setCodeRoute(source.getCodeRoute());
-		target.setRouteTime(source.getRouteTime());
-		target.setAirportDeparture(airportConverterFacade.convert(source.getAirportDeparture()));
-		target.setAirportArrival(airportConverterFacade.convert(source.getAirportArrival()));
+		if (source.getCodeRoute() != null)
+		{
+			target.setCodeRoute(source.getCodeRoute());
+		}
+		if (source.getRouteTime() != null)
+		{
+			target.setRouteTime(source.getRouteTime());
+		}
+		if (source.getAirportDeparture() != null)
+		{
+			target.setAirportDeparture(airportConverter.convert(source.getAirportDeparture()));
+		}
+		if (source.getAirportArrival() != null)
+		{
+			target.setAirportArrival(airportConverter.convert(source.getAirportArrival()));
+		}
 	}
 
 	/**
 	 * @return the airportConverterFacade
 	 */
-	public Converter<AirportModel, AirportData> getAirportConverterFacade()
+	public Converter<AirportModel, AirportData> getAirportConverter()
 	{
-		return airportConverterFacade;
+		return airportConverter;
 	}
 
 	@Required
-	public void setAirportConverterFacade(final Converter<AirportModel, AirportData> airportConverterFacade)
+	public void setAirportConverter(final Converter<AirportModel, AirportData> airportConverter)
 	{
-		this.airportConverterFacade = airportConverterFacade;
+		this.airportConverter = airportConverter;
 	}
 
 

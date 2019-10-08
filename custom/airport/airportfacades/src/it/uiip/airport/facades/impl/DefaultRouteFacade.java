@@ -4,6 +4,7 @@
 package it.uiip.airport.facades.impl;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 import java.util.List;
 
@@ -23,16 +24,23 @@ import it.uiip.airport.facades.data.RouteData;
 public class DefaultRouteFacade implements RouteFacade
 {
 	private RouteFlightService routeFlightService;
-	private Converter<RouteModel, RouteData> routeConverterFacade;
+	private Converter<RouteModel, RouteData> routeConverter;
 
 	@Override
 	public RouteData getRouteForCodeRoute(final String codeRoute)
 	{
-		try
+		if (codeRoute != null)
 		{
-			return routeConverterFacade.convert(routeFlightService.getRouteForCodeRoute(codeRoute));
+			try
+			{
+				return routeConverter.convert(routeFlightService.getRouteForCodeRoute(codeRoute));
+			}
+			catch (final ModelNotFoundException e)
+			{
+				return null;
+			}
 		}
-		catch (final Exception e)
+		else
 		{
 			return null;
 		}
@@ -41,13 +49,13 @@ public class DefaultRouteFacade implements RouteFacade
 	@Override
 	public List<RouteData> getAllRoutes()
 	{
-		return routeConverterFacade.convertAll(routeFlightService.getAllRoutes());
+		return routeConverter.convertAll(routeFlightService.getAllRoutes());
 	}
 
 	@Override
 	public List<RouteData> getRoutesForAirportDeparture(final String nameAirport)
 	{
-		return routeConverterFacade.convertAll(routeFlightService.getRoutesForAirportDeparture(nameAirport));
+		return routeConverter.convertAll(routeFlightService.getRoutesForAirportDeparture(nameAirport));
 	}
 
 
@@ -68,15 +76,15 @@ public class DefaultRouteFacade implements RouteFacade
 	/**
 	 * @return the routeConverterFacade
 	 */
-	public Converter<RouteModel, RouteData> getRouteConverterFacade()
+	public Converter<RouteModel, RouteData> getRouteConverter()
 	{
-		return routeConverterFacade;
+		return routeConverter;
 	}
 
 	@Required
-	public void setRouteConverterFacade(final Converter<RouteModel, RouteData> routeConverterFacade)
+	public void setRouteConverter(final Converter<RouteModel, RouteData> routeConverter)
 	{
-		this.routeConverterFacade = routeConverterFacade;
+		this.routeConverter = routeConverter;
 	}
 
 

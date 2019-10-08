@@ -60,7 +60,7 @@
 	<!-- ________________________________________________CONVERTER___________________________________________________ -->
 	
 	<!-- AirportModel impex converter -->
-	<bean id="airportConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchAirportConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -73,7 +73,7 @@
 	</bean>
 	
 	<!-- PlaneModel impex converter -->
-	  <bean id="planeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	  <bean id="batchPlaneConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
             <value>
                 #{defaultImpexProductHeader}
@@ -92,7 +92,7 @@
     </bean>
 	
 	<!-- AirlineModel impex converter -->
-	<bean id="airlineConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchAirlineConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -105,7 +105,7 @@
 	</bean>
 	
 	<!-- RouteModel impex converter -->
-	<bean id="routeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchRouteConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -123,7 +123,7 @@
 	</bean>
 	
 	<!-- FlightModel impex converter -->
-	<bean id="flightConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchFlightConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -136,7 +136,7 @@
 	</bean>
 	
 	<!-- PassengerModel impex converter -->
-	<bean id="passengerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchPassengerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -149,7 +149,7 @@
 	</bean>
 	
 	<!-- BookingPassengerModel impex converter -->
-	<bean id="bookingConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="batchBookingConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>
 				#{defaultImpexProductHeader}
@@ -165,46 +165,46 @@
 	<!-- ________________________________________________MAPPING___________________________________________________ -->
 	
 	<!-- AirportModel impex converter mapping to airport prefix -->
-	<bean id="airportConverterMapping"
+	<bean id="batchAirportConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="airport"
-		  p:converter-ref="airportConverter"/>
+		  p:converter-ref="batchAirportConverter"/>
 		  
 	<!-- PlaneModel impex converter mapping to plane prefix -->
-	<bean id="planeConverterMapping"
+	<bean id="batchPlaneConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="plane"
-		  p:converter-ref="planeConverter"/>
+		  p:converter-ref="batchPlaneConverter"/>
 		  
 	<!-- AirlineModel impex converter mapping to airline prefix -->
-	<bean id="airlineConverterMapping"
+	<bean id="batchAirlineConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="airline"
-		  p:converter-ref="airlineConverter"/>
+		  p:converter-ref="batchAirlineConverter"/>
 		  
 	<!-- RouteModel impex converter mapping to route prefix -->
-	<bean id="routeConverterMapping"
+	<bean id="batchRouteConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="route"
-		  p:converter-ref="routeConverter"/>
+		  p:converter-ref="batchRouteConverter"/>
 	
 	<!-- FlightModel impex converter mapping to flight prefix -->
-	<bean id="flightConverterMapping"
+	<bean id="batchFlightConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="flight"
-		  p:converter-ref="flightConverter"/>
+		  p:converter-ref="batchFlightConverter"/>
 		  
 	<!-- PassengerModel impex converter mapping to passenger prefix -->
-	<bean id="passengerConverterMapping"
+	<bean id="batchPassengerConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="passenger"
-		  p:converter-ref="passengerConverter"/>
+		  p:converter-ref="batchPassengerConverter"/>
 		 
 	<!-- BookingModel impex converter mapping to booking prefix -->
-	<bean id="bookingConverterMapping"
+	<bean id="batchBookingConverterMapping"
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 		  p:mapping="booking"
-		  p:converter-ref="bookingConverter"/>	  
+		  p:converter-ref="batchBookingConverter"/>	  
 		  
 		  
 	

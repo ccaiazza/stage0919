@@ -4,6 +4,7 @@
 package it.uiip.airport.facades.impl;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import it.uiip.airport.core.service.AirportService;
 import it.uiip.airport.facades.AirportFacade;
 import it.uiip.airport.facades.data.AirportData;
 
+
 /**
  * @author tminichiello
  *
@@ -21,28 +23,35 @@ import it.uiip.airport.facades.data.AirportData;
 public class DefaultAirportFacade implements AirportFacade
 {
 	private AirportService airportService;
-	private Converter<AirportModel, AirportData> airportConverterFacade;
+	private Converter<AirportModel, AirportData> airportConverter;
 
 	@Override
 	public List<AirportData> getAllAirports()
 	{
-		return airportConverterFacade.convertAll(airportService.getAllAirports());
+		return airportConverter.convertAll(airportService.getAllAirports());
 	}
 
 	@Override
 	public List<AirportData> getAirportsForCountry(final String country)
 	{
-		return airportConverterFacade.convertAll(airportService.getAirportsForCountry(country));
+		return airportConverter.convertAll(airportService.getAirportsForCountry(country));
 	}
 
 	@Override
 	public AirportData getAirportForCodeIATA(final String codeIata)
 	{
-		try
+		if (codeIata != null)
 		{
-			return airportConverterFacade.convert(airportService.getAirportForCodeIATA(codeIata));
+			try
+			{
+				return airportConverter.convert(airportService.getAirportForCodeIATA(codeIata));
+			}
+			catch (final ModelNotFoundException e)
+			{
+				return null;
+			}
 		}
-		catch (final Exception e)
+		else
 		{
 			return null;
 		}
@@ -67,13 +76,13 @@ public class DefaultAirportFacade implements AirportFacade
 	 */
 	public Converter<AirportModel, AirportData> getAirportConverter()
 	{
-		return airportConverterFacade;
+		return airportConverter;
 	}
 
 	@Required
-	public void setAirportConverterFacade(final Converter<AirportModel, AirportData> airportConverter)
+	public void setAirportConverter(final Converter<AirportModel, AirportData> airportConverter)
 	{
-		this.airportConverterFacade = airportConverter;
+		this.airportConverter = airportConverter;
 	}
 
 
