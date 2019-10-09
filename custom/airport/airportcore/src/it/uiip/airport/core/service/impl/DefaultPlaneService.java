@@ -1,13 +1,17 @@
 package it.uiip.airport.core.service.impl;
 
+
+
+
+
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 import it.uiip.airport.core.dao.PlaneDao;
-import it.uiip.airport.core.model.AirportModel;
 import it.uiip.airport.core.model.PlaneModel;
-import it.uiip.airport.core.service.AirportService;
 import it.uiip.airport.core.service.PlaneService;
 
 public class DefaultPlaneService implements PlaneService {
@@ -16,6 +20,7 @@ public class DefaultPlaneService implements PlaneService {
 
 	@Override
 	public PlaneModel getPlaneForCode(String codePlane) {
+		Assert.notNull(codePlane,"codePlaneIsNull");
 		return planeDao.findPlaneByCode(codePlane);
 	}
 

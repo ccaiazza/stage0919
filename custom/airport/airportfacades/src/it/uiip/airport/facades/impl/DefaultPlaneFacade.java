@@ -1,10 +1,13 @@
 package it.uiip.airport.facades.impl;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import it.uiip.airport.core.model.AirLineModel;
 import it.uiip.airport.core.model.PlaneModel;
 import it.uiip.airport.core.service.PlaneService;
@@ -36,7 +39,8 @@ public class DefaultPlaneFacade implements PlaneFacade {
 	}
 	@Override
 	public PlaneData getPlaneForCode(String codePlane) {
-		return planeConverter.convert(planeService.getPlaneForCode(codePlane));
+		return planeConverter.convert(planeService.getPlaneForCode(null));
+		
 	}
 	@Override
 	public List<PlaneData> getPlanesForState(String state) {

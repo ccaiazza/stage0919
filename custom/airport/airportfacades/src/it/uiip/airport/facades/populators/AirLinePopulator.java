@@ -8,16 +8,18 @@ import it.uiip.airport.facades.data.AirLineData;
 
 public class AirLinePopulator implements Populator<AirLineModel, AirLineData> {
 
-
 	@Override
-	public void populate(final AirLineModel source,final AirLineData target)
-			throws ConversionException {
-		
-		
-		
-		target.setCodeAirLine(source.getCodeAirLine());
-		target.setName(source.getName());
-		
+	public void populate(final AirLineModel source, final AirLineData target) throws ConversionException {
+
+		if (source != null) {
+			if (source.getCodeAirLine() != null) {
+				target.setCodeAirLine(source.getCodeAirLine());
+			}
+			if(source.getName()!=null) {
+							target.setName(source.getName());
+			}
+		}
+
 	}
 
 }

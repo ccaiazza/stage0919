@@ -19,17 +19,17 @@
 	<alias alias="airLineFacade" name="defaultAirLineFacade" />
 	<bean id="defaultAirLineFacade" class="it.uiip.airport.facades.impl.DefaultAirLineFacade">
 		<property name="airLineService" ref="airLineService" />
-		<property name="airLineConverter" ref="airLineConverterFacade" />
+		<property name="airLineConverter" ref="airLineConverter" />
 	</bean>
 	
 	<alias name="defaultPlaneFacade" alias="planeFacade"/>
 	<bean id="defaultPlaneFacade" class="it.uiip.airport.facades.impl.DefaultPlaneFacade">
 		<property name="planeService" ref="planeService"/>
-		<property name="planeConverter" ref="planeConverterFacade"/>
+		<property name="planeConverter" ref="planeConverter"/>
 	</bean>
 	
 	<!-- COVERTER BEAN -->
-		<alias alias="airLineConverterFacade" name="defaultAirLineConverter" />
+		<alias alias="airLineConverter" name="defaultAirLineConverter" />
 	<bean id="defaultAirLineConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
@@ -41,7 +41,7 @@
 		</property>
 	</bean>
 	
-	<alias alias="planeConverterFacade" name="defaultPlaneConverter" />
+	<alias alias="planeConverter" name="defaultPlaneConverter" />
 	<bean id="defaultPlaneConverter"
 		parent="abstractPopulatingConverter">
 		<property name="targetClass"
@@ -63,7 +63,7 @@
 	<alias name="defaultPlanePopulator" alias="planePopulator" />
 	<bean id="defaultPlanePopulator"
 		class="it.uiip.airport.facades.populators.PlanePopulator">
-		<property name="airLineConverter" ref="airLineConverterFacade"/>
+		<property name="airLineConverter" ref="airLineConverter"/>
 	</bean>
 	
 

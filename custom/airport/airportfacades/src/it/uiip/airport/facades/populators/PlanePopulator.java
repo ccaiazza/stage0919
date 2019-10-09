@@ -16,13 +16,27 @@ public class PlanePopulator implements Populator<PlaneModel,PlaneData> {
 	
 	@Override
 	public void populate(PlaneModel source, PlaneData target) throws ConversionException {
-		
-		target.setCodePlane(source.getCodePlane());
-		target.setModel(source.getModel().getCode());
-		target.setStatePlane(source.getStatePlane().getCode());
-		target.setNumberMaxSits(source.getNumberMaxSits());
-		target.setGoods(source.getGoods());
-		target.setAirLine(airLineConverter.convert(source.getAirline()));
+		if(source!= null) {
+			if(source.getCodePlane()!=null) {
+							target.setCodePlane(source.getCodePlane());
+			}
+			if(source.getModel().getCode() !=null) {
+				target.setModel(source.getModel().getCode());
+			}
+			if(source.getStatePlane().getCode()!= null) {
+				target.setStatePlane(source.getStatePlane().getCode());
+			}
+			if(source.getNumberMaxSits()!=null) {
+				target.setNumberMaxSits(source.getNumberMaxSits());
+			}
+			if(source.getGoods()!=null) {
+				target.setGoods(source.getGoods());
+			}
+			if(source.getAirline()!=null) {
+				target.setAirLine(airLineConverter.convert(source.getAirline()));
+			}
+		}
+
 		
 		
 	}

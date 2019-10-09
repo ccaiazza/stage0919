@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 public class DefaultAirLineFacade implements AirLineFacade {
 	
@@ -38,11 +39,8 @@ public class DefaultAirLineFacade implements AirLineFacade {
 
 	@Override
 	public AirLineData getAirLineforCodeAirLine(String codeAirLine) {
-		try {
-					return airLineConverter.convert(airLineService.getAirLineForCodeAirLine(codeAirLine));
-		}catch(Exception e) {
-			return null;
-		}
+			return airLineConverter.convert(airLineService.getAirLineForCodeAirLine(codeAirLine));
+		
 	}
 
 	@Override

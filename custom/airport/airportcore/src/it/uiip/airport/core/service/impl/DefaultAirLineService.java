@@ -3,7 +3,9 @@ package it.uiip.airport.core.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 import it.uiip.airport.core.dao.AirLineDao;
 import it.uiip.airport.core.model.AirLineModel;
@@ -26,6 +28,7 @@ public class DefaultAirLineService implements AirLineService {
 
 	@Override
 	public AirLineModel getAirLineForCodeAirLine(String codeAirLine) {
+		Assert.notNull(codeAirLine,"codeAirLineIsNull");
 		return airLineDao.findAirLineByCodeAirLine(codeAirLine);
 	}
 

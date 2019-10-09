@@ -36,8 +36,16 @@ public class AirportController extends AbstractPageController {
 	final String codeAirLine, final Model model, final HttpServletResponse response)
 	{
 		
-		final AirLineData airLine = airLineFacade.getAirLineforCodeAirLine(codeAirLine);
+		final AirLineData airLine = airLineFacade.getAirLineforCodeAirLine(codeAirLine.toUpperCase());
 		model.addAttribute("airLine", airLine);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchAirLinePage;
+
+	}
+	
+	@RequestMapping(value = "/searchAirLine/", method = RequestMethod.GET)
+	public String searchAirLineByCodeAirLine( final Model model, final HttpServletResponse response)
+	{
+		model.addAttribute("airLine", null);
 		return ControllerConstants.Views.Pages.Airport.AirportSearchAirLinePage;
 
 	}
@@ -66,6 +74,14 @@ public class AirportController extends AbstractPageController {
 
 	}
 	
+	@RequestMapping(value = "/searchPlane/", method = RequestMethod.GET)
+	public String searchPlaneByCodePlane(final Model model, final HttpServletResponse response)
+	{
+		model.addAttribute("plane", null);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanePage;
+
+	}
+	
 	@RequestMapping(value = "/searchPlanesByState/{state}", method = RequestMethod.GET)
 	public String searchPlanesByState(@PathVariable("state")
 	final String state, final Model model, final HttpServletResponse response)
@@ -87,6 +103,15 @@ public class AirportController extends AbstractPageController {
 		final AirLineData airLine = airLineFacade.getAirLineforCodeAirLine(codeAirLine);
 		model.addAttribute("planes", planes);
 		model.addAttribute("airLine", airLine);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanesByCodeAirLinePage;
+
+	}
+	
+	@RequestMapping(value = "/searchPlanesByCodeAirLine/", method = RequestMethod.GET)
+	public String searchPlanesByCodeAirLine(final Model model, final HttpServletResponse response)
+	{
+		model.addAttribute("planes", null);
+		model.addAttribute("airLine", null);
 		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanesByCodeAirLinePage;
 
 	}
