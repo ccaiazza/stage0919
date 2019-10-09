@@ -4,7 +4,6 @@
 package it.uiip.airport.facades.impl;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 import java.util.List;
 
@@ -29,21 +28,7 @@ public class DefaultRouteFacade implements RouteFacade
 	@Override
 	public RouteData getRouteForCodeRoute(final String codeRoute)
 	{
-		if (codeRoute != null)
-		{
-			try
-			{
-				return routeConverter.convert(routeFlightService.getRouteForCodeRoute(codeRoute));
-			}
-			catch (final ModelNotFoundException e)
-			{
-				return null;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		return routeConverter.convert(routeFlightService.getRouteForCodeRoute(codeRoute));
 	}
 
 	@Override

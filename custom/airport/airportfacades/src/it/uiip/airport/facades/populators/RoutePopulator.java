@@ -26,21 +26,24 @@ public class RoutePopulator implements Populator<RouteModel, RouteData>
 	@Override
 	public void populate(final RouteModel source, final RouteData target) throws ConversionException
 	{
-		if (source.getCodeRoute() != null)
+		if (source != null)
 		{
-			target.setCodeRoute(source.getCodeRoute());
-		}
-		if (source.getRouteTime() != null)
-		{
-			target.setRouteTime(source.getRouteTime());
-		}
-		if (source.getAirportDeparture() != null)
-		{
-			target.setAirportDeparture(airportConverter.convert(source.getAirportDeparture()));
-		}
-		if (source.getAirportArrival() != null)
-		{
-			target.setAirportArrival(airportConverter.convert(source.getAirportArrival()));
+			if (source.getCodeRoute() != null)
+			{
+				target.setCodeRoute(source.getCodeRoute());
+			}
+			if (source.getRouteTime() != null)
+			{
+				target.setRouteTime(source.getRouteTime());
+			}
+			if (source.getAirportDeparture() != null)
+			{
+				target.setAirportDeparture(airportConverter.convert(source.getAirportDeparture()));
+			}
+			if (source.getAirportArrival() != null)
+			{
+				target.setAirportArrival(airportConverter.convert(source.getAirportArrival()));
+			}
 		}
 	}
 

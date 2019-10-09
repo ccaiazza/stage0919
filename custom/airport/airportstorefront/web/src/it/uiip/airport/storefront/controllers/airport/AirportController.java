@@ -45,6 +45,14 @@ public class AirportController extends AbstractPageController
 		return ControllerConstants.Views.Pages.Airport.RouteSearchPageC;
 	}
 
+	@RequestMapping(value = "/searchRouteByCodeRoute/", method = RequestMethod.GET)
+	public String searchRouteByCodeRoute(final Model model, final HttpServletResponse response)
+	{
+		model.addAttribute("route", null);
+		return ControllerConstants.Views.Pages.Airport.RouteSearchPageC;
+	}
+
+
 	@RequestMapping(value = "/searchAllRoutes", method = RequestMethod.GET)
 	public String searchAllRoutes(final Model model, final HttpServletResponse response)
 	{
@@ -75,6 +83,13 @@ public class AirportController extends AbstractPageController
 	{
 		final AirportData airport = airportFacade.getAirportForCodeIATA(codeIata);
 		model.addAttribute("airport", airport);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPageC;
+	}
+
+	@RequestMapping(value = "/searchAirportByCodeIata/", method = RequestMethod.GET)
+	public String searchAirportsByCodeIata(final Model model, final HttpServletResponse response)
+	{
+		model.addAttribute("airport", null);
 		return ControllerConstants.Views.Pages.Airport.AirportSearchPageC;
 	}
 

@@ -6,6 +6,7 @@ package it.uiip.airport.core.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 import it.uiip.airport.core.dao.AirportDao;
 import it.uiip.airport.core.model.AirportModel;
@@ -22,6 +23,7 @@ public class DefaultAirportService implements AirportService
 	@Override
 	public AirportModel getAirportForCodeIATA(final String codeIATA)
 	{
+		Assert.notNull(codeIATA, "codeIATA is Null");
 		return airportDao.findAirportByCodeIATA(codeIATA);
 	}
 

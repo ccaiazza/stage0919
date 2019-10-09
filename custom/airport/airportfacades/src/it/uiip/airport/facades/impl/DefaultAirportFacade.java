@@ -4,7 +4,6 @@
 package it.uiip.airport.facades.impl;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 import java.util.List;
 
@@ -40,21 +39,7 @@ public class DefaultAirportFacade implements AirportFacade
 	@Override
 	public AirportData getAirportForCodeIATA(final String codeIata)
 	{
-		if (codeIata != null)
-		{
-			try
-			{
-				return airportConverter.convert(airportService.getAirportForCodeIATA(codeIata));
-			}
-			catch (final ModelNotFoundException e)
-			{
-				return null;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		return airportConverter.convert(airportService.getAirportForCodeIATA(codeIata));
 	}
 
 	/**

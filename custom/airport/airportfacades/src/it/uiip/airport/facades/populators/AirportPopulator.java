@@ -19,26 +19,28 @@ public class AirportPopulator implements Populator<AirportModel, AirportData>
 	@Override
 	public void populate(final AirportModel source, final AirportData target) throws ConversionException
 	{
-		if (source.getCodeIATA() != null)
+		if (source != null)
 		{
-			target.setCodeAirport(source.getCodeIATA());
+			if (source.getCodeIATA() != null)
+			{
+				target.setCodeAirport(source.getCodeIATA());
+			}
+			if (source.getName() != null)
+			{
+				target.setName(source.getName());
+			}
+			if (source.getCity() != null)
+			{
+				target.setCity(source.getCity());
+			}
+			if (source.getCountry() != null)
+			{
+				target.setCountry(source.getCountry());
+			}
+			if (source.getRunways() != null)
+			{
+				target.setRunways(source.getRunways());
+			}
 		}
-		if (source.getName() != null)
-		{
-			target.setName(source.getName());
-		}
-		if (source.getCity() != null)
-		{
-			target.setCity(source.getCity());
-		}
-		if (source.getCountry() != null)
-		{
-			target.setCountry(source.getCountry());
-		}
-		if (source.getRunways() != null)
-		{
-			target.setRunways(source.getRunways());
-		}
-
 	}
 }

@@ -3,11 +3,14 @@
  */
 package it.uiip.airport.core.dao.impl;
 
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import it.uiip.airport.core.dao.RouteDao;
 import it.uiip.airport.core.model.RouteModel;
@@ -19,6 +22,8 @@ import it.uiip.airport.core.model.RouteModel;
  */
 public class DefaultRouteDao extends DefaultGenericDao<RouteModel> implements RouteDao
 {
+
+	private static final Logger LOG = Logger.getLogger(DefaultRouteDao.class);
 	/**
 	 * @param typecode
 	 */
@@ -45,8 +50,16 @@ public class DefaultRouteDao extends DefaultGenericDao<RouteModel> implements Ro
 		queryStr.append("WHERE {R.codeRoute}=?codeRoute");
 		final FlexibleSearchQuery fsq = new FlexibleSearchQuery(queryStr);
 		fsq.addQueryParameter("codeRoute", codeRoute);
+		try
+		{
 		final RouteModel result = getFlexibleSearchService().searchUnique(fsq);
 		return result;
+		}
+		catch (final ModelNotFoundException e)
+		{
+			LOG.info("Route not found");
+		}
+		return null;
 	}
 
 	@Override
