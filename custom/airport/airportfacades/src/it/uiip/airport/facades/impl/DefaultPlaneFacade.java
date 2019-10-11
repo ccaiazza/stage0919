@@ -39,7 +39,7 @@ public class DefaultPlaneFacade implements PlaneFacade {
 	}
 	@Override
 	public PlaneData getPlaneForCode(String codePlane) {
-		return planeConverter.convert(planeService.getPlaneForCode(null));
+		return planeConverter.convert(planeService.getPlaneForCode(codePlane));
 		
 	}
 	@Override

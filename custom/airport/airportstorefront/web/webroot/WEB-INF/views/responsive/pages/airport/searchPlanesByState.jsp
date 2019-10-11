@@ -8,6 +8,12 @@
 <body>
 	<h1>Planes Listing for :   ${state} </h1>
 	<ul>
+	<c:if test="${planes.size()==0}">
+	 Plane with state:  (${state}) NOT FOUND
+	</c:if>
+	
+	
+		<c:if test="${planes.size()>0}">
 	
 	<table>
 		<tr>
@@ -28,6 +34,7 @@
 		</c:forEach>
 		
 	</table>
+	</c:if>
 	</ul>
 </body>
 </html>

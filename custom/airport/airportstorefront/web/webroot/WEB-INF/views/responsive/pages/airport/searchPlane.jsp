@@ -6,9 +6,12 @@
 <title>PLANE</title>
 </head>
 <body>
-	<h3>Plane By Code</h3>
-	<c:if test="${plane!=null}">
+	<h1>Plane By Code</h1>
+	<c:if test="${plane.codePlane!=null}">
 	${plane.codePlane} - ${plane.model} - ${plane.statePlane} - ${plane.numberMaxSits} - ${plane.goods} - ${plane.airLine.name}
+	</c:if>
+	<c:if test="${plane.codePlane==null}">
+	 Plane with codePlane: (${codePlane}) NOT FOUND
 	</c:if>
 </body>
 </html>

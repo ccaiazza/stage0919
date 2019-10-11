@@ -6,9 +6,14 @@
 <title>AIRLINE</title>
 </head>
 <body>
-	<h6>AirLine By Code</h6>
-	<c:if test="${airLine!=null}">
+	<h1>AirLine By Code</h1>
+	<c:if test="${airLine.codeAirLine!=null}">
 	${airLine.codeAirLine} - ${airLine.name}
 	</c:if>
+	
+	<c:if test="${airLine.codeAirLine==null}">
+	 AirLine with codeAirLine: (${codeAirLine}) NOT FOUND
+	</c:if>
+	
 </body>
 </html>

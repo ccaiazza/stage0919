@@ -8,6 +8,12 @@
 <body>
 	<h1>Planes Listing for :   ${airLine.codeAirLine} - ${airLine.name} </h1>
 	<ul>
+	<c:if test="${airLine.codeAirLine==null}">
+	 Plane with codeAirLine: (${codeAirLine}) NOT FOUND 
+	</c:if>
+	
+	<c:if test="${airLine.codeAirLine!=null}">
+
 	
 	
 	<table>
@@ -29,6 +35,7 @@
 		</c:forEach>
 		
 	</table>
+	</c:if>
 	</ul>
 </body>
 </html>

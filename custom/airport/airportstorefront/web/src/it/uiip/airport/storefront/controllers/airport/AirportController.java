@@ -38,18 +38,11 @@ public class AirportController extends AbstractPageController {
 		
 		final AirLineData airLine = airLineFacade.getAirLineforCodeAirLine(codeAirLine.toUpperCase());
 		model.addAttribute("airLine", airLine);
+		model.addAttribute("codeAirLine", codeAirLine);
 		return ControllerConstants.Views.Pages.Airport.AirportSearchAirLinePage;
 
 	}
-	
-	@RequestMapping(value = "/searchAirLine/", method = RequestMethod.GET)
-	public String searchAirLineByCodeAirLine( final Model model, final HttpServletResponse response)
-	{
-		model.addAttribute("airLine", null);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchAirLinePage;
-
-	}
-	
+		
 	@RequestMapping(value = "/searchAllAirLines", method = RequestMethod.GET)
 	public String searchAllAirLines(final Model model, final HttpServletResponse response)
 	{
@@ -74,13 +67,6 @@ public class AirportController extends AbstractPageController {
 
 	}
 	
-	@RequestMapping(value = "/searchPlane/", method = RequestMethod.GET)
-	public String searchPlaneByCodePlane(final Model model, final HttpServletResponse response)
-	{
-		model.addAttribute("plane", null);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanePage;
-
-	}
 	
 	@RequestMapping(value = "/searchPlanesByState/{state}", method = RequestMethod.GET)
 	public String searchPlanesByState(@PathVariable("state")
@@ -103,19 +89,11 @@ public class AirportController extends AbstractPageController {
 		final AirLineData airLine = airLineFacade.getAirLineforCodeAirLine(codeAirLine);
 		model.addAttribute("planes", planes);
 		model.addAttribute("airLine", airLine);
+		model.addAttribute("codeAirLine",codeAirLine);
 		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanesByCodeAirLinePage;
 
 	}
-	
-	@RequestMapping(value = "/searchPlanesByCodeAirLine/", method = RequestMethod.GET)
-	public String searchPlanesByCodeAirLine(final Model model, final HttpServletResponse response)
-	{
-		model.addAttribute("planes", null);
-		model.addAttribute("airLine", null);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPlanesByCodeAirLinePage;
-
-	}
-	
+		
 	@RequestMapping(value = "/searchAllPlanes", method = RequestMethod.GET)
 	public String searchAllPlanes(final Model model, final HttpServletResponse response)
 	{

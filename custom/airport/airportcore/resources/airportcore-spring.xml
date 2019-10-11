@@ -75,8 +75,7 @@
 
 
 
-	<bean id="agePassengerHandler"
-		class="it.uiip.airport.core.handler.AgePassengerHandler" />
+
 
 
 
