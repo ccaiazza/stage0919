@@ -21,7 +21,7 @@
 	</bean>
 	
 	<bean class="it.uiip.airport.facades.data.AirportData">
-		<property name="codeAirport" type="String"/>
+		<property name="codeIATA" type="String"/>
 		<property name="name" type="String"/>
 		<property name="city" type="String"/>
 		<property name="country" type="String"/>

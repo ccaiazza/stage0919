@@ -42,16 +42,9 @@ public class AirportController extends AbstractPageController
 	{
 		final RouteData route = routeFacade.getRouteForCodeRoute(codeRoute);
 		model.addAttribute("route", route);
-		return ControllerConstants.Views.Pages.Airport.RouteSearchPageC;
+		model.addAttribute("codeRoute", codeRoute);
+		return ControllerConstants.Views.Pages.Airport.RouteSearchPage;
 	}
-
-	@RequestMapping(value = "/searchRouteByCodeRoute/", method = RequestMethod.GET)
-	public String searchRouteByCodeRoute(final Model model, final HttpServletResponse response)
-	{
-		model.addAttribute("route", null);
-		return ControllerConstants.Views.Pages.Airport.RouteSearchPageC;
-	}
-
 
 	@RequestMapping(value = "/searchAllRoutes", method = RequestMethod.GET)
 	public String searchAllRoutes(final Model model, final HttpServletResponse response)
@@ -59,7 +52,7 @@ public class AirportController extends AbstractPageController
 		final List<RouteData> routes = routeFacade.getAllRoutes();
 		model.addAttribute("routes", routes);
 		model.addAttribute("tag", "All Routes");
-		return ControllerConstants.Views.Pages.Airport.RouteSearchPage;
+		return ControllerConstants.Views.Pages.Airport.RouteSearchPageList;
 	}
 
 	@RequestMapping(value = "/searchRoutesByAirportDeparture/{airportDeparture}", method = RequestMethod.GET)
@@ -69,7 +62,7 @@ public class AirportController extends AbstractPageController
 		final List<RouteData> routes = routeFacade.getRoutesForAirportDeparture(airportDeparture);
 		model.addAttribute("routes", routes);
 		model.addAttribute("tag", "From " + airportDeparture);
-		return ControllerConstants.Views.Pages.Airport.RouteSearchPage;
+		return ControllerConstants.Views.Pages.Airport.RouteSearchPageList;
 	}
 
 	//__________________________________________AIRPORT_____________________________________________
@@ -83,14 +76,8 @@ public class AirportController extends AbstractPageController
 	{
 		final AirportData airport = airportFacade.getAirportForCodeIATA(codeIata);
 		model.addAttribute("airport", airport);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPageC;
-	}
-
-	@RequestMapping(value = "/searchAirportByCodeIata/", method = RequestMethod.GET)
-	public String searchAirportsByCodeIata(final Model model, final HttpServletResponse response)
-	{
-		model.addAttribute("airport", null);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPageC;
+		model.addAttribute("codeIata", codeIata);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPage;
 	}
 
 	@RequestMapping(value = "/searchAirportByCountry/{country}", method = RequestMethod.GET)
@@ -99,7 +86,8 @@ public class AirportController extends AbstractPageController
 	{
 		final List<AirportData> airports = airportFacade.getAirportsForCountry(country);
 		model.addAttribute("airports", airports);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPage;
+		model.addAttribute("tag", "By country" + country);
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPageList;
 	}
 
 	@RequestMapping(value = "/searchAllAirports", method = RequestMethod.GET)
@@ -107,6 +95,7 @@ public class AirportController extends AbstractPageController
 	{
 		final List<AirportData> airports = airportFacade.getAllAirports();
 		model.addAttribute("airports", airports);
-		return ControllerConstants.Views.Pages.Airport.AirportSearchPage;
+		model.addAttribute("tag", "All Airports");
+		return ControllerConstants.Views.Pages.Airport.AirportSearchPageList;
 	}
 }

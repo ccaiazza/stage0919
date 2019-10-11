@@ -23,7 +23,7 @@ public class AirportPopulator implements Populator<AirportModel, AirportData>
 		{
 			if (source.getCodeIATA() != null)
 			{
-				target.setCodeAirport(source.getCodeIATA());
+				target.setCodeIATA(source.getCodeIATA());
 			}
 			if (source.getName() != null)
 			{

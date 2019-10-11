@@ -95,10 +95,10 @@ public interface ControllerConstants
 
 			interface Airport
 			{
+				String AirportSearchPageList = "pages/airport/searchAirportList";
 				String AirportSearchPage = "pages/airport/searchAirport";
-				String AirportSearchPageC = "pages/airport/searchAirportC";
+				String RouteSearchPageList = "pages/airport/searchRouteList";
 				String RouteSearchPage = "pages/airport/searchRoute";
-				String RouteSearchPageC = "pages/airport/searchRouteC";
 			}
 
 			interface Checkout // NOSONAR
