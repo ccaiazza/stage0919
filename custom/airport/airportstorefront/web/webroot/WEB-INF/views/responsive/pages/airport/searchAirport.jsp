@@ -3,14 +3,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>AirportList</title>
+<title>Airport</title>
 </head>
 <body>
-	<h1>Airport Listing</h1>
+	<h1>Airport</h1>
 	<ul>
-		<c:forEach var="airport" items="${airports}">
-			<li>${airport.name}</li>
-		</c:forEach>
+		<c:if test="${airport.codeIATA!=null}">	
+			<li>${airport.name} - ${airport.city} - ${airport.country} </li>	
+		</c:if>
+		<c:if test="${airport.codeIATA==null}">	
+			<li>Airport with codeIata ${codeIata} not found</li>
+		</c:if>
 	</ul>
 </body>
 </html>

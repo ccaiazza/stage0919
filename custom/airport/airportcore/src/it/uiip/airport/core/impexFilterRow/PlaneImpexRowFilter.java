@@ -1,11 +1,11 @@
 package it.uiip.airport.core.impexFilterRow;
 
+import de.hybris.platform.acceleratorservices.dataimport.batch.converter.ImpexRowFilter;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import de.hybris.platform.acceleratorservices.dataimport.batch.converter.ImpexRowFilter;
-import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import it.uiip.airport.core.service.AirLineService;
 
 public class PlaneImpexRowFilter implements ImpexRowFilter {
@@ -14,14 +14,10 @@ public class PlaneImpexRowFilter implements ImpexRowFilter {
 	
 	
 	@Override
-	public boolean filter(Map<Integer, String> row) {
+	public boolean filter(final Map<Integer, String> row) {
 		final String codeAirline=row.get(5);
-		try {
 		if(airLineService.getAirLineForCodeAirLine(codeAirline)!=null) {
 			return true;
-		}
-		}catch(ModelNotFoundException e) {
-			return false;
 		}
 		return false;
 	}
@@ -32,7 +28,7 @@ public class PlaneImpexRowFilter implements ImpexRowFilter {
 	}
 
 	@Required
-	public void setAirLineService(AirLineService airLineService) {
+	public void setAirLineService(final AirLineService airLineService) {
 		this.airLineService = airLineService;
 	}
 
