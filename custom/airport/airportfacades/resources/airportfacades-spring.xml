@@ -36,7 +36,27 @@
 		<property name="planeConverter" ref="planeConverter"/>
 	</bean>
 	
+	<alias alias="routeFacade" name="defaultRouteFacade" />
+	<bean id="defaultRouteFacade"
+		class="it.uiip.airport.facades.impl.DefaultRouteFacade">
+		<property name="routeFlightService" ref="routeFlightService" />
+		<property name="routeConverter" ref="routeConverter" />
+	</bean>
+	
 	<!-- COVERTER BEAN -->
+	
+	<alias alias="airportConverter" name="defaultAirportConverter" />
+    <bean id="defaultAirportConverter"
+        parent="abstractPopulatingConverter">
+        <property name="targetClass"
+            value="it.uiip.airport.facades.data.AirportData" />
+        <property name="populators">
+            <list>
+                <ref bean="airportPopulator" />
+            </list>
+        </property>
+    </bean>
+	
 		<alias alias="airLineConverter" name="defaultAirLineConverter" />
 	<bean id="defaultAirLineConverter"
 		parent="abstractPopulatingConverter">
@@ -61,31 +81,6 @@
 		</property>
 	</bean>
 	
-
-	
-	<!-- POPULATOR BEAN -->
-	<alias name="defaultAirLinePopulator" alias="airLinePopulator" />
-	<bean id="defaultAirLinePopulator"
-		class="it.uiip.airport.facades.populators.AirLinePopulator">
-	</bean>
-	
-	<alias name="defaultPlanePopulator" alias="planePopulator" />
-	<bean id="defaultPlanePopulator"
-		class="it.uiip.airport.facades.populators.PlanePopulator">
-		<property name="airLineConverter" ref="airLineConverter"/>
-	</bean>
-	
-
-	 <!-- _____________________ROUTE____________________ -->
-	 
-	<alias alias="routeFacade" name="defaultRouteFacade" />
-	<bean id="defaultRouteFacade"
-		class="it.uiip.airport.facades.impl.DefaultRouteFacade">
-		<property name="routeFlightService" ref="routeFlightService" />
-		<property name="routeConverter" ref="routeConverter" />
-	</bean>
-
- 
 	<alias alias="routeConverter" name="defaultRouteConverter" />
 	<bean id="defaultRouteConverter"
 		parent="abstractPopulatingConverter">
@@ -98,6 +93,26 @@
 		</property>
 	</bean>
 
+	
+	<!-- POPULATOR BEAN -->
+	
+    <alias name="defaultAirportPopulator" alias="airportPopulator" />
+    <bean id="defaultAirportPopulator"
+        class="it.uiip.airport.facades.populators.AirportPopulator">
+    </bean>
+	
+	
+	<alias name="defaultAirLinePopulator" alias="airLinePopulator" />
+	<bean id="defaultAirLinePopulator"
+		class="it.uiip.airport.facades.populators.AirLinePopulator">
+	</bean>
+	
+	<alias name="defaultPlanePopulator" alias="planePopulator" />
+	<bean id="defaultPlanePopulator"
+		class="it.uiip.airport.facades.populators.PlanePopulator">
+		<property name="airLineConverter" ref="airLineConverter"/>
+	</bean>
+	
 	<alias name="defaultRoutePopulator" alias="routePopulator" />
 	<bean id="defaultRoutePopulator"
 		class="it.uiip.airport.facades.populators.RoutePopulator">

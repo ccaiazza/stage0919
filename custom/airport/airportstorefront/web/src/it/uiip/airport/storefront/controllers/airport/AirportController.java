@@ -20,7 +20,9 @@ import it.uiip.airport.facades.AirportFacade;
 import it.uiip.airport.facades.PlaneFacade;
 import it.uiip.airport.facades.RouteFacade;
 import it.uiip.airport.facades.data.AirLineData;
+import it.uiip.airport.facades.data.AirportData;
 import it.uiip.airport.facades.data.PlaneData;
+import it.uiip.airport.facades.data.RouteData;
 import it.uiip.airport.storefront.controllers.ControllerConstants;
 
 @Controller
