@@ -20,9 +20,18 @@
 		<property name="name" type="String"/>
 	</bean>
 	
+
 	<bean class="it.uiip.airport.facades.data.AirLineData">
 		<property name="codeAirLine" type="String"/>
 		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.facades.data.AirportData">
+		<property name="codeIATA" type="String"/>
+		<property name="name" type="String"/>
+		<property name="city" type="String"/>
+		<property name="country" type="String"/>
+		<property name="runways" type="Integer"/>
 	</bean>
 	
 	<bean class="it.uiip.airport.facades.data.PlaneData">
@@ -33,17 +42,13 @@
 		<property name="goods" type="Integer"/>
 		<property name="airLine" type="it.uiip.airport.facades.data.AirLineData"/>
 	</bean>
-	
-	
-	
-	<!--  
-	<bean class="it.uiip.airport.facades.data.PlaneData">
-		<property name="codePlane" type="String"/>
-		<property name="model" type="String"/>
-		<property name="statePlane" type="String"/>
-		<property name="numberMaxSits" type="Integer"/>
-		<property name="goods" type="Integer"/>
+
+	<bean class="it.uiip.airport.facades.data.RouteData">
+		<property name="codeRoute" type="String"/>
+		<property name="airportDeparture" type="it.uiip.airport.facades.data.AirportData"/>
+		<property name="airportArrival" type="it.uiip.airport.facades.data.AirportData"/>
+		<property name="routeTime" type="Integer"/>
 	</bean>
-	-->
 	
 </beans>
+

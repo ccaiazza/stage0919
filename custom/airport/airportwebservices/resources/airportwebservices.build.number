@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Oct 30 10:02:57 UTC 2018
+builddate=20181030 1002
+description=airportwebservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=airportwebservices
+releasedate=20181030 0434
+vendor=hybris
+version=18.11
+version.api=1811

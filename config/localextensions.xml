@@ -11,7 +11,7 @@
 		<extension name="airportcore"/>
 		<extension name="airportfacades"/>
 		<extension name="airportbackoffice"/>
-		<extension name="airportstorefront"/>		
-
+		<extension name="airportstorefront"/>	
+		<extension name="airportwebservices"/>
 	</extensions>
 </hybrisconfig>
