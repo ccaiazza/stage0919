@@ -20,7 +20,8 @@
 
 		<!-- Commons security imports -->
 		<import resource="classpath:webservicescommons/commons-security-spring.xml"/>
-		
+		<import resource="classpath*:oauth2-resource-spring.xml"/>
+		 
  		<!-- Security configuration for swagger resources -->
 		<security:http pattern="/#{configurationService.configuration.getProperty('springfox.documentation.swagger.v2.path')}" security="none"/>
 		<security:http pattern="/swagger-resources/**" security="none"/>
@@ -28,30 +29,34 @@
 		<security:http pattern="/webjars/*swagger*/**" security="none"/>
 	
 		<!-- Security configuration for resources -->
-		<http pattern="/**" entry-point-ref="oauthAuthenticationEntryPoint" use-expressions="true" xmlns="http://www.springframework.org/schema/security">
 		
-			<session-management session-authentication-strategy-ref="fixation" />
+			<!--  http pattern="/**" entry-point-ref="oauthAuthenticationEntryPoint" use-expressions="true" xmlns="http://www.springframework.org/schema/security"-->
+	 <http pattern="/rest/**" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"  use-expressions="false" access-decision-manager-ref="accessDecisionManager"  xmlns="http://www.springframework.org/schema/security">
+	 <anonymous enabled="false"/>
+			<!-- session-management session-authentication-strategy-ref="fixation" /-->
 
 			<!-- for PRODUCTION make sure that webservicescommons.required.channel=https -->
-			<intercept-url pattern="/sample/users/{id}" access="hasRole('ROLE_CLIENT')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
-			<intercept-url pattern="/**" access="isAuthenticated()" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
-
-			<port-mappings>
+			<!-- intercept-url pattern="/sample/users/{id}" access="hasRole('ROLE_CLIENT')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" /-->
+			<!-- intercept-url pattern="/**" access="isAuthenticated()" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" /-->
+	
+	<intercept-url pattern="/rest/**" access="IS_AUTHENTICATED_FULLY" method="GET"/>
+	
+			<!-- port-mappings>
 				<port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}" https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}" />
 				<port-mapping http="#{configurationService.configuration.getProperty('embeddedserver.http.port')}" https="#{configurationService.configuration.getProperty('embeddedserver.ssl.port')}" />
-			</port-mappings>
+			</port-mappings -->
 
 			<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
-			<custom-filter ref="hybrisUserFilter" after="LAST" />
+			<!-- custom-filter ref="hybrisUserFilter" after="LAST" /-->
 			<access-denied-handler ref="oauthAccessDeniedHandler" />
 			
-			<headers>
+			<!-- headers>
 				<content-type-options />
 				<hsts include-subdomains="true" max-age-seconds="16070400" />
 				<xss-protection />
 				<frame-options disabled="true"/>
 			</headers>
-			<csrf disabled="true"/>
+			<csrf disabled="true"/-->
 		</http>
 
 		

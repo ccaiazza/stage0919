@@ -13,5 +13,7 @@
 		<extension name="airportbackoffice"/>
 		<extension name="airportstorefront"/>	
 		<extension name="airportwebservices"/>
+		<extension name="oauth2"/>
+		
 	</extensions>
 </hybrisconfig>
