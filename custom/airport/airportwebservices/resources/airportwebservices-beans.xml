@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	
+	<!-- DATA -->
+	<bean class="it.uiip.airport.data.UserDataList">
+		<property name="users" type="java.util.List&lt;it.uiip.airport.data.UserData>"/>
+	</bean>
+
+	<bean class="it.uiip.airport.data.UserData" >
+		<property name="defaultBillingAddress" type="it.uiip.airport.data.AddressData"/>
+		<property name="defaultShippingAddress" type="it.uiip.airport.data.AddressData"/>
+		<property name="addresses" type="java.util.List&lt;it.uiip.airport.data.AddressData>"/>
+		<property name="description" type="String"/>
+		<property name="firstName" type="String"/>
+		<property name="lastName" type="String"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.data.AddressDataList">
+		<property name="addresses" type="java.util.List&lt;it.uiip.airport.data.AddressData>"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.data.AddressData">
+		<property name="streetname" type="String"/>
+		<property name="streetnumber" type="String"/>
+		<property name="town" type="String"/>
+		<property name="shippingAddress" type="boolean"/>
+		<property name="billingAddress" type="boolean"/>
+		<property name="defaultAddress" type="boolean"/>
+		<property name="formattedAddress" type="String"/>
+	</bean>
+
+	<!-- DTO -->
+	
+	<!-- ####################  CUSTOM  ###################### -->
+	<bean class="it.uiip.airport.dto.AirportDTO">
+		<property name="codeIATA" type="String"/>
+		<property name="name" type="String"/>
+		<property name="city" type="String"/>
+		<property name="country" type="String"/>
+		<property name="runways" type="Integer"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.data.AirportDataList">
+		<property name="list" type="java.util.List&lt;it.uiip.airport.facades.data.AirportData>"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.dto.AirportListDTO">
+		<description>Airport list</description>
+		<property name="airports" type="java.util.List&lt;it.uiip.airport.dto.AirportDTO>"/>
+	</bean>
+	
+	
+	<bean class="it.uiip.airport.dto.SampleWsDTO">
+		<description>Sample DTO</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">sample</hint>
+		</hints>
+		<property name="value" type="String">
+			<description>sample value</description>
+			<hints>
+				<hint name="required">true</hint>
+			</hints>
+		</property>
+	</bean>
+
+	<bean class="it.uiip.airport.dto.UsersListWsDTO">
+		<description>User list</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">usersList</hint>
+		</hints>
+		<property name="users" type="java.util.List&lt;it.uiip.airport.dto.UserWsDTO>"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.dto.UsersPageWsDTO" extends="de.hybris.platform.webservicescommons.dto.SearchPageWsDTO&lt;it.uiip.airport.dto.UserWsDTO>" >
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">usersPage</hint>
+		</hints>
+	</bean>
+
+	<bean class="it.uiip.airport.dto.UserWsDTO">
+		<description>User DTO</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">user</hint>
+		</hints>
+		<property name="addresses" type="java.util.List&lt;it.uiip.airport.dto.AddressWsDTO>"/>
+		<property name="firstName" type="String">
+			<description>First Name</description>
+			<hints>
+				<hint name="required">true</hint>
+			</hints>
+		</property>
+		<property name="lastName" type="String">
+			<description>Last Name</description>
+			<hints>
+				<hint name="required">true</hint>
+			</hints>
+		</property>
+		<property name="info" type="String" />
+		<property name="billingAddress" type="it.uiip.airport.dto.AddressWsDTO">
+			<description>Billing Address</description>
+		</property>
+		<property name="shippingAddress" type="it.uiip.airport.dto.AddressWsDTO">
+			<description>Shipping Address</description>
+		</property>
+	</bean>
+	
+	<bean class="it.uiip.airport.dto.AddressListWsDTO">
+		<description>List of addresses</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">addressList</hint>
+		</hints>
+		<property name="addresses" type="java.util.List&lt;it.uiip.airport.dto.AddressWsDTO>"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.dto.AddressWsDTO">
+		<description>Address DTO</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">address</hint>
+		</hints>
+		<property name="street" type="String"/>
+		<property name="town" type="String"/>
+		<property name="streetNumber" type="String"/>
+	</bean>
+	
+	<bean class="it.uiip.airport.dto.TestMapWsDTO">
+		<description>Example of DTO with map</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">testMap</hint>
+		</hints>
+		<property name="stringMap" type="java.util.Map&lt;String,String>"/>
+		<property name="integerMap" type="java.util.Map&lt;String,Integer>"/>
+	</bean>
+
+</beans>

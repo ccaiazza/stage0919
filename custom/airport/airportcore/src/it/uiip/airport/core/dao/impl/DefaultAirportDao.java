@@ -5,6 +5,7 @@ package it.uiip.airport.core.dao.impl;
 
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
@@ -23,6 +24,7 @@ public class DefaultAirportDao extends DefaultGenericDao<AirportModel> implement
 {
 
 	private static final Logger LOG = Logger.getLogger(DefaultAirportDao.class);
+	private ModelService modelService;
 	/**
 	 * @param typecode
 	 */
@@ -73,5 +75,42 @@ public class DefaultAirportDao extends DefaultGenericDao<AirportModel> implement
 		final SearchResult<AirportModel> result = getFlexibleSearchService().search(fsq);
 		return result.getResult();
 	}
+
+	@Override
+	public boolean addAirport(final AirportModel airport)
+	{
+		if (findAirportByCodeIATA(airport.getCodeIATA()) == null)
+		{
+			try
+			{
+				modelService.save(airport);
+				return true;
+			}
+			catch (final Exception e)
+			{
+				return false;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @return the modelService
+	 */
+	public ModelService getModelService()
+	{
+		return modelService;
+	}
+
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
+
 
 }

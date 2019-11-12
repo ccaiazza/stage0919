@@ -21,6 +21,7 @@
 		class="it.uiip.airport.facades.impl.DefaultAirportFacade">
 		<property name="airportService" ref="airportService" />
 		<property name="airportConverter" ref="airportConverter" />
+		<property name="airportReverseConverter" ref="airportReverseConverter"></property>
 	</bean>
 
  
@@ -39,6 +40,24 @@
 	<alias name="defaultAirportPopulator" alias="airportPopulator" />
 	<bean id="defaultAirportPopulator"
 		class="it.uiip.airport.facades.populators.AirportPopulator">
+	</bean>
+	
+	
+	<alias alias="airportReverseConverter" name="defaultAirportReverseConverter" />
+	<bean id="defaultAirportReverseConverter"
+		parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="it.uiip.airport.core.model.AirportModel" />
+		<property name="populators">
+			<list>
+				<ref bean="airportReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultAirportReversePopulator" alias="airportReversePopulator" />
+	<bean id="defaultAirportReversePopulator"
+		class="it.uiip.airport.facades.populators.AirportReversePopulator">
 	</bean>
 	
 	 <!-- _____________________ROUTE____________________ -->

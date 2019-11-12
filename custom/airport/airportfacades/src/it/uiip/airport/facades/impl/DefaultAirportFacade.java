@@ -23,6 +23,7 @@ public class DefaultAirportFacade implements AirportFacade
 {
 	private AirportService airportService;
 	private Converter<AirportModel, AirportData> airportConverter;
+	private Converter<AirportData, AirportModel> airportReverseConverter;
 
 	@Override
 	public List<AirportData> getAllAirports()
@@ -68,6 +69,26 @@ public class DefaultAirportFacade implements AirportFacade
 	public void setAirportConverter(final Converter<AirportModel, AirportData> airportConverter)
 	{
 		this.airportConverter = airportConverter;
+	}
+
+	@Override
+	public boolean addAirport(final AirportData airport)
+	{
+		return airportService.addAirport(airportReverseConverter.convert(airport));
+	}
+
+	/**
+	 * @return the airportReverseConverter
+	 */
+	public Converter<AirportData, AirportModel> getAirportReverseConverter()
+	{
+		return airportReverseConverter;
+	}
+
+	@Required
+	public void setAirportReverseConverter(final Converter<AirportData, AirportModel> airportReverseConverter)
+	{
+		this.airportReverseConverter = airportReverseConverter;
 	}
 
 

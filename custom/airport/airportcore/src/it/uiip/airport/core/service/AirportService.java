@@ -19,6 +19,8 @@ public interface AirportService
 	public List<AirportModel> getAllAirports();
 
 	public List<AirportModel> getAirportsForCountry(String country);
+
+	public boolean addAirport(AirportModel airport);
 }
 
 

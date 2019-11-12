@@ -18,4 +18,6 @@ public interface AirportFacade
 	public List<AirportData> getAirportsForCountry(String country);
 
 	public AirportData getAirportForCodeIATA(String codeIata);
+
+	public boolean addAirport(AirportData airport);
 }

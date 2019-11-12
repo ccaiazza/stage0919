@@ -53,4 +53,19 @@ public class DefaultAirportService implements AirportService
 		this.airportDao = airportDao;
 	}
 
+
+	@Override
+	public boolean addAirport(final AirportModel airport)
+	{
+		final boolean result = false;
+		try
+		{
+			return airportDao.addAirport(airport);
+		}
+		catch (final Exception e)
+		{
+			return result;
+		}
+	}
+
 }

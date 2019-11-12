@@ -21,4 +21,6 @@ public interface AirportDao extends GenericDao<AirportModel>
 	public List<AirportModel> findAirportsByCountry(String country);
 
 	public List<AirportModel> findAllAirports();
+
+	public boolean addAirport(AirportModel airport);
 }
